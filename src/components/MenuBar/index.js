@@ -9,24 +9,21 @@ class MenuBar extends Component {
         super(props);
     }
     render() {
-        const {actuallyWindow, onSelectWindow} = this.props;
-        const {backgroundColor, colorBtnChecked, colorBtnNoChecked} = this.props.kolorystyka;
+        const {actuallyWindow, onSelectWindow, colors} = this.props;
         return (
             <>
-                <View style={styles.contenerMain(this.props.colors)}>
-                    <AllButtons 
+                <View style={styles.contenerMain(colors)}>
+                    <BarOfMenuBtn 
                         actuallyWindow={actuallyWindow}
                         onSelectWindow={onSelectWindow}
-                        colorBtnChecked={colorBtnChecked}
-                        colorBtnNoChecked={colorBtnNoChecked}
-                        colors={this.props.colors}
+                        colors={colors}
                     />
                 </View>
             </>
-            );
+        );
     }
 }
-const AllButtons = ({actuallyWindow, onSelectWindow, colorBtnChecked, colorBtnNoChecked, colors}) => {
+const BarOfMenuBtn = ({actuallyWindow, onSelectWindow, colors}) => {
     let code = [];
     const path = [
         require('../../assets/images/home.png'),
@@ -35,14 +32,12 @@ const AllButtons = ({actuallyWindow, onSelectWindow, colorBtnChecked, colorBtnNo
     ];
     for (let i = 1; i <= path.length; i++) {
         var isSelected = (i == actuallyWindow);
-        var colorBtn = isSelected ? colorBtnChecked : colorBtnNoChecked;
         code.push(
-            <MenuBarBtn
+            <MenuBtn
                 key={i}
                 idBtn={i}
                 onSelectWindow={onSelectWindow}
                 imageSource={path[i - 1]}
-                colorBtn={colorBtn}
                 isSelected={isSelected}
                 colors={colors}
             />,
@@ -50,27 +45,24 @@ const AllButtons = ({actuallyWindow, onSelectWindow, colorBtnChecked, colorBtnNo
     }
     return code;
 }
-const MenuBarBtn = (props) => {
-    const {idBtn, onSelectWindow, imageSource, colorBtn, isSelected, colors} = props; 
+const MenuBtn = ({idBtn, onSelectWindow, imageSource, isSelected, colors}) => {
     return (
-        <View style={styles.widthBtn}>
-            <TouchableOpacity onPress={() => {onSelectWindow(idBtn)}} style={styles.touchableArea}>
+        <View style={styles.btnView}>
+            <TouchableOpacity 
+                onPress={() => {onSelectWindow(idBtn)}} style={styles.btnTouchableArea}
+            >
                 <Image
                     source={imageSource}
-                    style={styles.imageStyle}
-                    tintColor={colorBtn}
+                    style={styles.btnImageStyle}
+                    tintColor={styles.btnImageColor(colors, isSelected)}
                 />
-                <View style={styles.lineContener}>
-                    <View style={[styles.line, {backgroundColor: colorBtn, height: isSelected ? 1 : 0}]}/>
+                <View style={styles.btnLineContener}>
+                    <View style={styles.btnSelectedLine(colors, isSelected)}/>
                 </View>
             </TouchableOpacity>
         </View>
     );
 }
-
-/*MenuBar.propTypes = {
-    kolorystyka: PropTypes.object.isRequired,
-}*/
 
 const mapStateToProps = state => ({
     actuallyWindow: state.selectedWindow,

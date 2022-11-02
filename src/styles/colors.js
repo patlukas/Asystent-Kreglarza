@@ -8,25 +8,27 @@ const SILVER = '#bdc3c7';
 const BLACK = "#000000";
 
 const common = {
- PRIMARY: SUN_FLOWER,
- SUCCESS: EMERALD,
- ERROR: ALIZARIN,
+    PRIMARY: SUN_FLOWER,
+    SUCCESS: EMERALD,
+    ERROR: ALIZARIN,
+    menuBar_btnNoChecked: EMERALD,
+    menuBar_btnChecked: SUN_FLOWER
 };
 
 const light = {
- ...common,
- BACKGROUND: CLOUDS,
- TEXT: MIDNIGHT_BLUE,
- TEXT_SECONDARY: ASBESTOS,
- bgMenuBar: SILVER
+    ...common,
+    BACKGROUND: CLOUDS,
+    TEXT: MIDNIGHT_BLUE,
+    TEXT_SECONDARY: ASBESTOS,
+    menuBar_bg: SILVER
 };
 
 const dark = {
- ...common,
- BACKGROUND: MIDNIGHT_BLUE,
- TEXT: CLOUDS,
- TEXT_SECONDARY: SILVER,
- bgMenuBar: BLACK
+    ...common,
+    BACKGROUND: MIDNIGHT_BLUE,
+    TEXT: CLOUDS,
+    TEXT_SECONDARY: SILVER,
+    menuBar_bg: BLACK
 };
 
 export const colors = {light, dark};

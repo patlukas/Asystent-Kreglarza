@@ -7,30 +7,35 @@ export const styles = StyleSheet.create({
         height: 42,
         bottom: 0,
         position: 'absolute',
-        backgroundColor: colors.bgMenuBar
+        backgroundColor: colors.menuBar_bg
     }),
-    widthBtn: {
+    btnView: {
         width: '33.33%',
     },
-    touchableArea: {
+    btnTouchableArea: {
         width: '100%',
         height: '100%',
     },
-    imageStyle: {
+    btnImageStyle: {
         height: 31,
         width: 31,
         marginTop: 6,
         marginLeft: 'auto',
         marginRight: 'auto',
     },
-    lineContener: {
+    btnLineContener: {
         width: '100%',
         position: 'absolute',
         bottom: 0,
     },
-    line: {
+    btnSelectedLine: (colors, isSelected) => ({
         marginLeft: 'auto',
         marginRight: 'auto',
         width: 50,
-    }
+        height: isSelected ? 1 : 0,
+        backgroundColor: colors.menuBar_btnChecked
+    }),
+    btnImageColor: (colors, isSelected) => (
+        isSelected ? colors.menuBar_btnChecked : colors.menuBar_btnNoChecked
+    )
 })
