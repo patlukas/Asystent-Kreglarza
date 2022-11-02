@@ -9,12 +9,12 @@ class MenuBar extends Component {
         super(props);
     }
     render() {
-        const {actuallyWindow, onSelectWindow, colors} = this.props;
+        const {selectedWindow, onSelectWindow, colors} = this.props;
         return (
             <>
                 <View style={styles.contenerMain(colors)}>
                     <BarOfMenuBtn 
-                        actuallyWindow={actuallyWindow}
+                        selectedWindow={selectedWindow}
                         onSelectWindow={onSelectWindow}
                         colors={colors}
                     />
@@ -23,7 +23,7 @@ class MenuBar extends Component {
         );
     }
 }
-const BarOfMenuBtn = ({actuallyWindow, onSelectWindow, colors}) => {
+const BarOfMenuBtn = ({selectedWindow, onSelectWindow, colors}) => {
     let code = [];
     const path = [
         require('../../assets/images/home.png'),
@@ -31,7 +31,7 @@ const BarOfMenuBtn = ({actuallyWindow, onSelectWindow, colors}) => {
         require('../../assets/images/settings.png'),
     ];
     for (let i = 1; i <= path.length; i++) {
-        var isSelected = (i == actuallyWindow);
+        var isSelected = (i == selectedWindow);
         code.push(
             <MenuBtn
                 key={i}
@@ -65,7 +65,7 @@ const MenuBtn = ({idBtn, onSelectWindow, imageSource, isSelected, colors}) => {
 }
 
 const mapStateToProps = state => ({
-    actuallyWindow: state.selectedWindow,
+    selectedWindow: state.selectedWindow,
     colors: state.theme.colors
 })
 
