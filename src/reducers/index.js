@@ -1,10 +1,12 @@
 import { combineReducers } from "redux";
-import resultsList from "./resultsList";
+import listOfResults from "./listOfResults";
 import selectedWindow from "./selectedWindow";
 import theme from "./theme";
+import listOfGameTypes from "./listOfGameTypes";
 
 export default combineReducers({
-    resultsList,
+    listOfResults,
     selectedWindow,
-    theme
+    theme,
+    listOfGameTypes
 })
