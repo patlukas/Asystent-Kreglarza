@@ -6,13 +6,24 @@ const ALIZARIN = '#e74c3c';
 const CLOUDS = '#ff00ff';
 const SILVER = '#bdc3c7';
 const BLACK = "#000000";
+const GRAY = "#555555"
 
 const common = {
     PRIMARY: SUN_FLOWER,
     SUCCESS: EMERALD,
     ERROR: ALIZARIN,
     menuBar_btnNoChecked: EMERALD,
-    menuBar_btnChecked: SUN_FLOWER
+    menuBar_btnChecked: SUN_FLOWER,
+    gameType: {
+        1: SUN_FLOWER,
+        2: ALIZARIN,
+        3: CLOUDS,
+        4: EMERALD
+    },
+    font: {
+        basic: MIDNIGHT_BLUE,
+        notImportant: GRAY,
+    }
 };
 
 const light = {
