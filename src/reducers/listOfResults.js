@@ -9,9 +9,9 @@ const initialState = [
         date: 19302, //liczba dni od 01.01.1970
         leagueData: {
             team: {
-                teamSum: 3561,
-                teamPoints: [1.5, 6.5],
-                setPoints: [12.5, 11.5],
+                sum: 3561,
+                teamPoints: [1, 7],
+                setPoints: [1, 23],
             },
             player: {
                 teamPoints: 0.5,
@@ -29,7 +29,7 @@ const initialState = [
         numberOfLanes: 4,
         numberOfThrowsInLane: [15, 15],
         where: [true, "w Gostyniu"],
-        comment: "Pogoda była zła i tory były złe",
+        comment: "",
         season: "2022/2023"
     },
     {
@@ -42,7 +42,7 @@ const initialState = [
         date: 19305, //liczba dni od 01.01.1970
         leagueData: {
             team: {
-                teamSum: 3561,
+                sum: 3561,
                 teamPoints: [1.5, 6.5],
                 setPoints: [12.5, 11.5],
             },
@@ -62,7 +62,49 @@ const initialState = [
         numberOfLanes: 4,
         numberOfThrowsInLane: [15, 15],
         where: [true, "w Tarnowie Podgórnym"],
-        comment: "Pogoda była zła i tory były złe",
+        comment: "WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW ",
+        season: "2022/2023"
+    },
+    {
+        id: 3,
+        gameType: {
+            id: 3,
+            name: "Zawody",
+            keyHowManyLanes: 4
+        },
+        date: 19306, //liczba dni od 01.01.1970
+        leagueData: null,
+        results: {
+            suma: [600, 150, 151, 147, 152],
+            pelne: [400, 99, 101, 98, 102],
+            zbierane: [200, 51, 50, 49, 50],
+            dziury: [3, 0, 1, 0, 2],
+        },
+        numberOfLanes: 4,
+        numberOfThrowsInLane: [15, 15],
+        where: [true, "w Tarnowie Podgórnym"],
+        comment: "WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW ",
+        season: "2022/2023"
+    },
+    {
+        id: 4,
+        gameType: {
+            id: 4,
+            name: "Trening",
+            keyHowManyLanes: 4
+        },
+        date: 19306, //liczba dni od 01.01.1970
+        leagueData: null,
+        results: {
+            suma: [600, 150, 151, 147, 152],
+            pelne: [400, 99, 101, 98, 102],
+            zbierane: [200, 51, 50, 49, 50],
+            dziury: [3, 0, 1, 0, 2],
+        },
+        numberOfLanes: 4,
+        numberOfThrowsInLane: [15, 15],
+        where: [true, "w Tarnowie Podgórnym"],
+        comment: "WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW ",
         season: "2022/2023"
     }
 ]
