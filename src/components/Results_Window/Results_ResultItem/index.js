@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View} from 'react-native';
+import {Button, Text, View} from 'react-native';
 import { connect } from "react-redux";
 import {styles} from "./styles";
 
@@ -13,7 +13,7 @@ class Results_ResultItem extends Component {
             case 1:
             case 2:
                 return (
-                    <View style={styles.contener(item.gameType.id, colors)}>
+                    <View style={styles.container(item.gameType.id, colors)}>
                         <TextHead colors={colors} text={item.gameType.name+" "+item.where[1]}  />
                         <TextHead colors={colors} text={item.leagueData.enemyTeam[1]} />
                         <League_TeamResultsAndDate colors={colors} item={item} />
@@ -25,7 +25,7 @@ class Results_ResultItem extends Component {
             case 3:
             case 4:
                 return (
-                    <View style={styles.contener(item.gameType.id, colors)}>
+                    <View style={styles.container(item.gameType.id, colors)}>
                         <TextHead colors={colors} text={item.gameType.name+" "+item.where[1]}  />
                         <BasicGame_NumberOfThrowsAndDate colors={colors} item={item} />
                         <BasicGame_PlayerResults colors={colors} item={item} />
@@ -45,7 +45,7 @@ const League_TeamResultsAndDate = ({colors, item}) => {
         <View style={styles.viewRow}>
             <Text style={styles.cellMainInfo(colors, "31%")}>Suma: {sum}</Text>
             <View style={styles.cellMainInfo(colors, "38%")}>
-                <View style={styles.league.matchResultContener}>
+                <View style={styles.league.matchResultContainer}>
                     <Text style={styles.league.setPoints(colors)}>{textSetPoints[0]}</Text> 
                     <Text style={styles.league.teamPoints(colors)}>{teamPoints[0]} : {teamPoints[1]}</Text>
                     <Text style={styles.league.setPoints(colors)}>{textSetPoints[1]}</Text>
@@ -87,7 +87,7 @@ const PlayerResults_Row = ({listText, listWidth, style}) => {
     var code = [];
     for(var i=0; i<listText.length; i++) {
         code.push(
-            <Text style={[style, styles.playerResults.column(listWidth[i])]}>
+            <Text key={i} style={[style, styles.playerResults.column(listWidth[i])]}>
                 {listText[i]}
             </Text>
         )

@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-    contener: (gameTypeId, colors) => ({
+    container: (gameTypeId, colors) => ({
         backgroundColor: colors.gameType[gameTypeId],
         paddingTop: 7,
         paddingBottom: 7
@@ -28,7 +28,7 @@ export const styles = StyleSheet.create({
             fontWeight: "bold",
             fontSize: 16
         }),
-        matchResultContener: {
+        matchResultContainer: {
             alignItems: "baseline", 
             justifyContent: "center", 
             flexDirection: 'row', 

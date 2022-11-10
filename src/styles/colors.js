@@ -23,6 +23,10 @@ const common = {
     font: {
         basic: MIDNIGHT_BLUE,
         notImportant: GRAY,
+    },
+    resultsBtnAddNewResult: {
+        backgroundColor: "#000",
+        color: "#fff"
     }
 };
 
