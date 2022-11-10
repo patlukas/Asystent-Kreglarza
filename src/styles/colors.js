@@ -27,6 +27,10 @@ const common = {
     resultsBtnAddNewResult: {
         backgroundColor: "#000",
         color: "#fff"
+    },
+    barTop: {
+        backgroundColor: MIDNIGHT_BLUE,
+        color: SUN_FLOWER
     }
 };
 

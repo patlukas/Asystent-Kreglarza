@@ -4,7 +4,8 @@ import MenuBar from '../MenuBar';
 import {styles} from "./styles";
 import {connect} from "react-redux";
 import { onChangeTheme } from '../../actions';
-import Results_Window from '../Results_Window';
+import Results_Window from '../Results_Window/Results_Window';
+import Create_Window from '../Create_Window/Create_Window';
 
 
 class App extends React.Component {
@@ -16,6 +17,8 @@ class App extends React.Component {
         switch(selectedWindow) {
             case 1:
                 return <Results_Window />
+            case 4:
+                return <Create_Window />;
             default:
                 return (
                     <View style={styles.container(colors)}>
