@@ -32,10 +32,15 @@ const common = {
         backgroundColor: "#000",
         color: SUN_FLOWER
     },
-    formForCreateResult: {
+    form: {
+        main: "#55f",
+        input: "#ff9"
+    },
+    formForCreateResult: { //to del
         fontHead: "#66f",
         clearBtnBg: "#356",
-        clearBtnColor: "#cba"
+        clearBtnColor: "#cba",
+        
     }
 };
 
