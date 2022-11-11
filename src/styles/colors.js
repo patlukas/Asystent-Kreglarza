@@ -29,8 +29,13 @@ const common = {
         color: "#fff"
     },
     barTop: {
-        backgroundColor: MIDNIGHT_BLUE,
+        backgroundColor: "#000",
         color: SUN_FLOWER
+    },
+    formForCreateResult: {
+        fontHead: "#66f",
+        clearBtnBg: "#356",
+        clearBtnColor: "#cba"
     }
 };
 
