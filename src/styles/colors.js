@@ -34,7 +34,10 @@ const common = {
     },
     form: {
         main: "#55f",
-        input: "#ff9"
+        input: "#ff9",
+        dropdownItemTextSelected: "#777",
+        dropdownItemTextNoSelected: "#ddd",
+        dropdownPickerBackground: "#333"
     },
     formForCreateResult: { //to del
         fontHead: "#66f",
