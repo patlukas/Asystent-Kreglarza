@@ -35,6 +35,7 @@ const common = {
     form: {
         main: "#55f",
         input: "#ff9",
+        dataPicker: "#ff9",
         dropdownItemTextSelected: "#777",
         dropdownItemTextNoSelected: "#ddd",
         dropdownPickerBackground: "#333"
