@@ -10,8 +10,8 @@ const DatePicker = ({colors, onChange, selectedDate}) => {
         selectedDate - liczba dni od 01.01.1970, jak -1 to pokazuje dzisiejszą datę, 
                        jak -2 to pokazuje dzisiejszą i zwraca ją do onChange
     */
-    if(selectedDate == -2) onChange(getUnixTimeToday());
-    const unixTime = (selectedDate < 0) ? getUnixTimeToday() : selectedDate*24*3600*1000;
+    if(selectedDate == -2) onChange(getUnixTimeToday() / (24 * 3600 * 1000));
+    const unixTime = (selectedDate < 0) ? (new Date()).getTime() : selectedDate*24*3600*1000;
 
     const [date, setDate] = useState(new Date(unixTime));
     const [show, setShow] = useState(false);
@@ -38,22 +38,27 @@ const DatePicker = ({colors, onChange, selectedDate}) => {
     );
 }
 
+const getDateToString = (date) => {
+    return date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2)+"-"+("0" + date.getDate()).slice(-2);
+}
+
 const getUnixTimeToday = () => {
-    var date = new Date();
-    var dateSting = date.getFullYear() + "-" + (date.getMonth()+1)+"-"+date.getDate();
+    var dateSting = getDateToString(new Date())
     var dateToday = new Date(dateSting);
     return dateToday.getTime();
 }
 
 const onDateToString = (date) => {
-    return date.getDate() + "." + (date.getMonth() + 1) + "." + date.getFullYear();
+    return ("0" + date.getDate()).slice(-2) + "." + ("0" + (date.getMonth() + 1)).slice(-2) + "." + date.getFullYear();
 }
 
 const onCloseDatePicker = (event, selectedDate, setShow, setDate, onChange, date) => {
     setShow(false);
     if(event.type == "set" && selectedDate.getTime() != date.getTime()) {
         setDate(selectedDate);
-        onChange(selectedDate);
+        var selectedDateString = getDateToString(selectedDate)
+        var date = new Date(selectedDateString)
+        onChange(date.getTime() / (24 * 3600 * 1000));
     }
 };
 
