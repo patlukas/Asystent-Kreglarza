@@ -1,39 +1,40 @@
 import React from 'react';
-import {Text, StyleSheet, View, TextInput} from 'react-native';
+import {StyleSheet, View} from 'react-native';
+import { OutlinedTextField } from 'react-native-material-textfield';
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 
 const CommentInput = ({colors, rememberedComment, onChange}) => {
     return (
-        <View style={styles.container(colors)} >
-            <Text style={styles.text(colors)}>Komentarz (opcjonalne) (max 80 znaków)</Text>
-            <TextInput maxLength={80} style={styles.textInput(colors)} onChangeText={(text) => onChange(text)}>
-                {rememberedComment}
-            </TextInput>
+        <View style={styles.container}>
+            <OutlinedTextField
+                value={rememberedComment}
+                onEndEditing={(event) => onChange(event.nativeEvent.text)}                
+                label='Komentarz (opcjonalny)'
+                characterRestriction={100}
+                maxLength={100}
+                textColor={colors.form.input}
+                tintColor={colors.form.main}
+                baseColor={colors.form.main}
+                titleTextStyle={{bottom: 20}}
+                contentInset={styles.contentInset}
+            />
         </View>
     )
 }
 
+
 const styles = StyleSheet.create({
-    container: (colors) => ({
-        color: colors.form.main,
-        borderColor: colors.form.main,
+    container: {
+        marginTop: 20,
         width: '96%',
-        borderWidth: 1,
         marginLeft: '2%',
-        height: 50,
-        marginTop: 25,
-    }),
-    text: (colors) => ({
-        color: colors.form.main,
-        paddingLeft: "2%",
-    }),
-    textInput: (colors) => ({
-        color: colors.form.input,
-        marginLeft: 5,
-        marginRight: 5,
-        bottom: 2
-    })
+        height: 57
+    },
+    contentInset: {
+        input: 14, 
+        label: 2
+    }
 })
 
 CommentInput.propTypes = {

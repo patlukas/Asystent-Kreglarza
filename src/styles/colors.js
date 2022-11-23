@@ -33,7 +33,7 @@ const common = {
         color: SUN_FLOWER
     },
     form: {
-        main: "#55f",
+        main: "#ccf",
         input: "#ff9",
         dataPicker: "#ff9",
         dropdownItemTextSelected: "#777",
