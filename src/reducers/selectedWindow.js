@@ -1,4 +1,4 @@
-const initialState = 3;
+const initialState = 4;
 
 const selectedWindow = function (state = initialState, action) {
     switch (action.type) {

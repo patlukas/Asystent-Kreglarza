@@ -11,3 +11,10 @@ export const onChangeTheme = function() {
         type: 'CHANGE_THEME'
     }
 }
+
+export const onEditCreateResult = function(resultItem) {
+    return {
+        type: 'EDIT_CREATE_RESULT',
+        payload: {resultItem}
+    }
+}
