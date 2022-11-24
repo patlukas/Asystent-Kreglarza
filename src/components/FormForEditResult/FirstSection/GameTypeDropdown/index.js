@@ -6,7 +6,7 @@ import {Dropdown} from 'react-native-material-dropdown';
 
 const GameTypeDropdown = ({colors, listOfGameTypes, selectedGameTypeId, onChange}) => {
     var data = [];
-    listOfGameTypes.forEach(el => { data.push({ label: el.name, value: el.id }) });
+    listOfGameTypes.forEach(el => { data.push({ label: el.name, value: el.id, name: el.shortName }) });
 
     return (
         <View style={styles.container}>
@@ -19,7 +19,7 @@ const GameTypeDropdown = ({colors, listOfGameTypes, selectedGameTypeId, onChange
                 pickerStyle={{backgroundColor: colors.form.dropdownPickerBackground}}
                 value={selectedGameTypeId}
                 itemCount={5.35}
-                onChangeText={onChange}
+                onChangeText={(_, index) => onChange({gameType: {name: data[index].name, id: data[index].value}})}
                 fontSize={14}
             />
         </View>
