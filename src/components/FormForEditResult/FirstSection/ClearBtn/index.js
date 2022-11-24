@@ -3,11 +3,10 @@ import {Text, StyleSheet, TouchableOpacity} from 'react-native';
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 
-const ClearBtn = ({colors, visible, onPress}) => {
-    if(!visible) return null;
+const ClearBtn = ({colors, name, onPress}) => {
     return (
         <TouchableOpacity style={styles.button(colors)} onPress={onPress} >
-            <Text style={styles.buttonText(colors)}>Wyczyść formularz</Text>
+            <Text style={styles.buttonText(colors)}>{name}</Text>
         </TouchableOpacity>
     );
 }
@@ -27,7 +26,7 @@ const styles = StyleSheet.create({
 })
 
 ClearBtn.propTypes = {
-    visible: PropTypes.bool.isRequired,
+    name: PropTypes.string.isRequired,
     onPress: PropTypes.func
 }
 
