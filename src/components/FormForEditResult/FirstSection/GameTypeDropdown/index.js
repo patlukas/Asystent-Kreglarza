@@ -6,7 +6,12 @@ import {Dropdown} from 'react-native-material-dropdown';
 
 const GameTypeDropdown = ({colors, listOfGameTypes, selectedGameTypeId, onChange}) => {
     var data = [];
-    listOfGameTypes.forEach(el => { data.push({ label: el.name, value: el.id, name: el.shortName }) });
+    let existsGameType = false;
+    listOfGameTypes.forEach(el => { 
+        if(selectedGameTypeId == el.id) existsGameType = true;
+        data.push({ label: el.name, value: el.id, name: el.shortName }) 
+    });
+    if(!existsGameType) selectedGameTypeId = undefined;
 
     return (
         <View style={styles.container}>
