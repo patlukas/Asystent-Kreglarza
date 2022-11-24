@@ -13,9 +13,19 @@ const DatePicker = ({colors, onChange, selectedDate}) => {
     if(selectedDate == -2) onChange(getUnixTimeToday() / (24 * 3600 * 1000));
     const unixTime = (selectedDate < 0) ? (new Date()).getTime() : selectedDate*24*3600*1000;
 
-    const [date, setDate] = useState(new Date(unixTime));
+    let date = new Date(unixTime)
     const [show, setShow] = useState(false);
-    
+
+    const onCloseDatePicker = (event, selectedDate) => {
+        setShow(false);
+        if(event.type == "set" && selectedDate.getTime() != date.getTime()) {
+            date = new Date(selectedDate)
+            var selectedDateString = getDateToString(selectedDate)
+            var dateMidnight = new Date(selectedDateString)
+            onChange(dateMidnight.getTime() / (24 * 3600 * 1000));
+        }
+    };
+
     return (
         <TouchableOpacity style={styles.mainContainers(colors)} onPress={() => setShow(true)}>
             <View style={styles.container}>
@@ -29,7 +39,7 @@ const DatePicker = ({colors, onChange, selectedDate}) => {
             {show && (
                 <DateTimePicker
                     value={date}
-                    onChange={(e, d) => onCloseDatePicker(e, d, setShow, setDate, onChange, date)}
+                    onChange={(e, d) => onCloseDatePicker(e, d)}
                     maximumDate={new Date(getUnixTimeToday())}
                     minimumDate={new Date("2000-06-06")}
                 />
@@ -51,16 +61,6 @@ const getUnixTimeToday = () => {
 const onDateToString = (date) => {
     return ("0" + date.getDate()).slice(-2) + "." + ("0" + (date.getMonth() + 1)).slice(-2) + "." + date.getFullYear();
 }
-
-const onCloseDatePicker = (event, selectedDate, setShow, setDate, onChange, date) => {
-    setShow(false);
-    if(event.type == "set" && selectedDate.getTime() != date.getTime()) {
-        setDate(selectedDate);
-        var selectedDateString = getDateToString(selectedDate)
-        var date = new Date(selectedDateString)
-        onChange(date.getTime() / (24 * 3600 * 1000));
-    }
-};
 
 DatePicker.propTypes = {
     selectedDate: PropTypes.number.isRequired,
