@@ -6,21 +6,18 @@ import PropTypes from 'prop-types';
 import {styles} from "./styles";
 
 const DatePicker = ({colors, onChange, selectedDate}) => {   
-    /*
-        selectedDate - liczba dni od 01.01.1970, jak -1 to pokazuje dzisiejszą datę, 
-                       jak -2 to pokazuje dzisiejszą i zwraca ją do onChange
-    */
-    if(selectedDate == -2) onChange(getUnixTimeToday() / (24 * 3600 * 1000));
+    // selectedDate - liczba dni od 01.01.1970, jak -1 to pokazuje dzisiejszą datę 
     const unixTime = (selectedDate < 0) ? (new Date()).getTime() : selectedDate*24*3600*1000;
 
     let date = new Date(unixTime)
     const [show, setShow] = useState(false);
 
-    const onCloseDatePicker = (event, selectedDate) => {
+    const onCloseDatePicker = (event, newDate) => {
         setShow(false);
-        if(event.type == "set" && selectedDate.getTime() != date.getTime()) {
-            date = new Date(selectedDate)
-            var selectedDateString = getDateToString(selectedDate)
+        console.log(event, newDate)
+        if(event.type == "set" && (newDate.getTime() != date.getTime() || selectedDate == -1)) {
+            date = new Date(newDate)
+            var selectedDateString = getDateToString(newDate)
             var dateMidnight = new Date(selectedDateString)
             onChange(dateMidnight.getTime() / (24 * 3600 * 1000));
         }
