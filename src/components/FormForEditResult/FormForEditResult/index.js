@@ -90,4 +90,4 @@ const mapStateToProps = state => ({
     colors: state.theme.colors
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(FormForEditResult);
+export default connect(mapStateToProps, undefined)(FormForEditResult);
