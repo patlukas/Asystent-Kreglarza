@@ -59,6 +59,18 @@ class FormForEditResult extends Component {
                     wasChange = true
                 }
                 break;
+            case "teamPoints":
+                if(editedResult.leagueData.team.teamPoints != value) {
+                    editedResult.leagueData.team.teamPoints = value;
+                    wasChange = true
+                }
+                break;
+            case "setPoints":
+                if(editedResult.leagueData.team.setPoints != value) {
+                    editedResult.leagueData.team.setPoints = value;
+                    wasChange = true
+                }
+                break;
         }
         if(wasChange) {
             console.log("Była zmiana", editedResult)

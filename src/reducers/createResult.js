@@ -9,8 +9,8 @@ const clearResult = {
     leagueData: {
         team: {
             sum: -1,
-            teamPoints: -1,
-            setPoints: [1, 23]-1,
+            teamPoints: [],
+            setPoints: [],
         },
         player: {
             teamPoints: -1,

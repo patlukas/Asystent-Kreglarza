@@ -9,14 +9,14 @@ import DatePicker from '../DatePicker';
 const FirstSection = ({nameClearButton, onChange, resultItem}) => {
     const {comment, gameType, date} = resultItem;
     return (
-        <>
+        <View style={styles.mainContainers}>
             <ClearBtn name={nameClearButton} onPress={() => onChange({key: "clear", value: undefined})} />
             <CommentInput rememberedComment={comment} onChange={(value) => onChange({key: "comment", value})} />
             <View style={styles.oneLineContainer}>
                 <GameTypeDropdown selectedGameTypeId={gameType.id} onChange={(value) => onChange({key: "gameType", value})}/>
                 <DatePicker selectedDate={date} onChange={(date) => onChange({key: "date", value: date})}/>
             </View>
-        </>
+        </View>
     );
 }
 
@@ -24,7 +24,11 @@ const styles = StyleSheet.create({
     oneLineContainer: {
         flexWrap: 'wrap', 
         flexDirection: 'row'
+    },
+    mainContainers: {
+        marginBottom: 20
     }  
+
 })
 
 FirstSection.propTypes = {
