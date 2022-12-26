@@ -24,7 +24,7 @@ const GameTypeDropdown = ({colors, listOfGameTypes, selectedGameTypeId, onChange
                 pickerStyle={{backgroundColor: colors.form.dropdownPickerBackground}}
                 value={selectedGameTypeId}
                 itemCount={5.35}
-                onChangeText={(_, index) => onChange({gameType: {name: data[index].name, id: data[index].value}})}
+                onChangeText={(_, index) => onChange({name: data[index].name, id: data[index].value})}
                 fontSize={14}
             />
         </View>
