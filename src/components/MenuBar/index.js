@@ -11,15 +11,13 @@ class MenuBar extends Component {
     render() {
         const {selectedWindow, onSelectWindow, colors} = this.props;
         return (
-            <>
-                <View style={styles.contenerMain(colors)}>
-                    <BarOfMenuBtn 
-                        selectedWindow={selectedWindow}
-                        onSelectWindow={onSelectWindow}
-                        colors={colors}
-                    />
-                </View>
-            </>
+            <View style={styles.containerMain(colors)}>
+                <BarOfMenuBtn 
+                    selectedWindow={selectedWindow}
+                    onSelectWindow={onSelectWindow}
+                    colors={colors}
+                />
+            </View>            
         );
     }
 }
@@ -48,15 +46,13 @@ const BarOfMenuBtn = ({selectedWindow, onSelectWindow, colors}) => {
 const MenuBtn = ({idBtn, onSelectWindow, imageSource, isSelected, colors}) => {
     return (
         <View style={styles.btnView}>
-            <TouchableOpacity 
-                onPress={() => {onSelectWindow(idBtn)}} style={styles.btnTouchableArea}
-            >
+            <TouchableOpacity onPress={() => {onSelectWindow(idBtn)}} style={styles.btnTouchableArea} >
                 <Image
                     source={imageSource}
                     style={styles.btnImageStyle}
                     tintColor={styles.btnImageColor(colors, isSelected)}
                 />
-                <View style={styles.btnLineContener}>
+                <View style={styles.btnLineContainer}>
                     <View style={styles.btnSelectedLine(colors, isSelected)}/>
                 </View>
             </TouchableOpacity>

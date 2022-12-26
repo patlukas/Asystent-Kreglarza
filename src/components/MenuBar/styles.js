@@ -1,9 +1,8 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-    contenerMain: colors => ({
+    containerMain: colors => ({
         flexDirection: 'row',
-        width: '100%',
         height: 42,
         bottom: 0,
         position: 'absolute',
@@ -23,7 +22,7 @@ export const styles = StyleSheet.create({
         marginLeft: 'auto',
         marginRight: 'auto',
     },
-    btnLineContener: {
+    btnLineContainer: {
         width: '100%',
         position: 'absolute',
         bottom: 0,

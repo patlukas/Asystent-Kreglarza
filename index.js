@@ -10,9 +10,11 @@ const store = createStore(rootReducer);
 
 registerRootComponent(function() {
     return (
-        <Provider store={store}>
-            <StatusBar style="auto" />
-            <App />
-        </Provider>
+        <>
+            <StatusBar style="light" translucent={false}/>
+            <Provider store={store}>
+                <App />
+            </Provider>
+        </>
     )
 });
