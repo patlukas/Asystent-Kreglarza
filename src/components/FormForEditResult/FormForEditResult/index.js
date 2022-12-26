@@ -3,6 +3,7 @@ import {Text, StyleSheet, ScrollView} from 'react-native';
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import FirstSection from '../FirstSection/FirstSection';
+import SecondSection from '../SecondSection/SecondSection';
 
 class FormForEditResult extends Component {
     constructor(props) {
@@ -16,6 +17,11 @@ class FormForEditResult extends Component {
                 <FirstSection 
                     title={"Nowy Wynik"} 
                     nameClearButton={nameClearButton} 
+                    onChange={this.onPrepareResultItemAfterChange}
+                    resultItem={editedResult}
+                />
+
+                <SecondSection
                     onChange={this.onPrepareResultItemAfterChange}
                     resultItem={editedResult}
                 />

@@ -8,7 +8,7 @@ const initialState = [
             homePlace: true,
         },
         details: {
-            isSetPoints: true,
+            isLeague: true,
             sumTeamPoints: 8,
             sumSetPoints: 24,
         },
@@ -42,7 +42,7 @@ const initialState = [
             homePlace: true,
         },
         details: {
-            isSetPoints: true,
+            isLeague: true,
             sumTeamPoints: 6,
             sumSetPoints: 16,
         },
@@ -76,9 +76,43 @@ const initialState = [
             homePlace: true,
         },
         details: {
-            isSetPoints: true,
+            isLeague: true,
             sumTeamPoints: 6,
             sumSetPoints: 16,
+        },
+        numberOfThrowsInLane: [15, 15],
+        howManyLanes: {
+            question: "Ile torów",
+            options: [
+                {
+                    key: 1,
+                    label: "1 Tor",
+                    numberOfLanes: 1,
+                    numberOfLanesInForm: 1,
+                    canWinDuel: false
+                },
+                {
+                    key: 4,
+                    label: "4 Tory",
+                    numberOfLanes: 4,
+                    numberOfLanesInForm: 4,
+                    canWinDuel: true
+                }
+            ]
+        }
+    },
+    {
+        id: 4,
+        name: "Zawody",
+        shortName: "Zawody",
+        defaultPlace: {
+            trainingPlace: false,
+            homePlace: false,
+        },
+        details: {
+            isLeague: false,
+            sumTeamPoints: 0,
+            sumSetPoints: 0,
         },
         numberOfThrowsInLane: [15, 15],
         howManyLanes: {
