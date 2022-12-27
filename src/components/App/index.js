@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, Button, Animated} from 'react-native';
 import MenuBar from '../MenuBar';
 import {styles} from "./styles";
 import {connect} from "react-redux";
@@ -14,19 +14,20 @@ class App extends React.Component {
     }
     render () {
         const {selectedWindow, colors, onChangeTheme} = this.props;
+
         switch(selectedWindow) {
-            case 1:
-                return <Results_Window />
-            case 4:
-                return <Create_Window />;
+            case 1: 
+                return <Animated.View style={styles.container(colors)}><Results_Window/></Animated.View>
+            case 4: 
+                return <Animated.View style={styles.container(colors)}><Create_Window/></Animated.View>
             default:
                 return (
-                    <View style={styles.container(colors)}>
+                    <Animated.View style={styles.container(colors)}>
                         <Text style={styles.text}>Open up App.js to start working on your app!</Text>
                         <Button onPress={onChangeTheme} title={"CLICK"} color={"#ffff00"}/>
                         <MenuBar />
-                    </View>
-                );
+                    </Animated.View>
+                )
         }
     }
 }
