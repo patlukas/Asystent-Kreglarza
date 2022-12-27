@@ -3,6 +3,7 @@ import {View, StyleSheet, Text} from 'react-native';
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import LeaguePointsDropdown from '../LeaguePointsDropdown';
+import HomeOrAwayDropdown from '../HomeOrAwayDropdown';
 
 const SecondSection = ({onChange, resultItem, listOfGameTypes}) => {
     const {gameType} = resultItem;
@@ -17,6 +18,7 @@ const SecondSection = ({onChange, resultItem, listOfGameTypes}) => {
             <View style={styles.oneLineContainer}>
                 <LeaguePointsDropdown label={"Punkty drużynowe"} onChange={(value) => onChange({key: "teamPoints", value})} selected={teamPoints} sumPoints={sumTeamPoints} />
                 <LeaguePointsDropdown label={"Punkty setowe"} onChange={(value) => onChange({key: "setPoints", value})} selected={setPoints} sumPoints={sumSetPoints} />
+                <HomeOrAwayDropdown onChange={(value) => onChange({key: "inHome", value})} selected={resultItem.leagueData.inHome} />
             </View>
         )
     }

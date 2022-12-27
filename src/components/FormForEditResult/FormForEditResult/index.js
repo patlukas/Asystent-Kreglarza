@@ -71,6 +71,21 @@ class FormForEditResult extends Component {
                     wasChange = true
                 }
                 break;
+            case "inHome":
+                if(editedResult.leagueData.inHome != value) {
+                    editedResult.leagueData.inHome = value;
+                    wasChange = true
+                }
+                /*
+                    TODO jak
+                        - ustawiono inHome = 1 i nie ustawiono miejsca meczu to
+                            ustaw miejsce meczu na home
+                        - ustawiono in home = 0 i jest już ustwaione miejsce ale nie ma rywala
+                            ustaw rywala na tego z tego miejcea
+                        - ustawioni inhome - 0 i nie ustawiono miejsca ale jest rywal
+                            ustaw miejsce na miejce od rywala
+                            */
+                break;
         }
         if(wasChange) {
             console.log("Była zmiana", editedResult)
