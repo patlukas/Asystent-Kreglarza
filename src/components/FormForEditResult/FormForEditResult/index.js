@@ -86,6 +86,12 @@ class FormForEditResult extends Component {
                             ustaw miejsce na miejce od rywala
                             */
                 break;
+            case "teamSum":
+                if(editedResult.leagueData.team.sum != value) {
+                    editedResult.leagueData.team.sum = value;
+                    wasChange = true
+                }
+                break;
         }
         if(wasChange) {
             console.log("Była zmiana", editedResult)

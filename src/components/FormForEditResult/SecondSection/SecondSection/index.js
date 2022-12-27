@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import LeaguePointsDropdown from '../LeaguePointsDropdown';
 import HomeOrAwayDropdown from '../HomeOrAwayDropdown';
+import SumTeamInput from '../SumTeamInput';
 
 const SecondSection = ({onChange, resultItem, listOfGameTypes}) => {
     const {gameType} = resultItem;
@@ -13,12 +14,13 @@ const SecondSection = ({onChange, resultItem, listOfGameTypes}) => {
 
     if(gameTypeObject.details.isLeague) {
         const {sumTeamPoints, sumSetPoints} = gameTypeObject.details;
-        const {teamPoints, setPoints} = resultItem.leagueData.team;
+        const {teamPoints, setPoints, sum} = resultItem.leagueData.team;
         return (
             <View style={styles.oneLineContainer}>
                 <LeaguePointsDropdown label={"Punkty drużynowe"} onChange={(value) => onChange({key: "teamPoints", value})} selected={teamPoints} sumPoints={sumTeamPoints} />
                 <LeaguePointsDropdown label={"Punkty setowe"} onChange={(value) => onChange({key: "setPoints", value})} selected={setPoints} sumPoints={sumSetPoints} />
                 <HomeOrAwayDropdown onChange={(value) => onChange({key: "inHome", value})} selected={resultItem.leagueData.inHome} />
+                <SumTeamInput onChange={(value) => onChange({key: "teamSum", value})} value={sum} />
             </View>
         )
     }
