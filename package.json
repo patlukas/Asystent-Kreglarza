@@ -11,13 +11,14 @@
   "dependencies": {
     "@react-native-community/datetimepicker": "^6.6.0",
     "expo": "~46.0.16",
-    "expo-splash-screen": "~0.16.2",
+    "expo-splash-screen": "^0.16.2",
     "expo-status-bar": "~1.4.0",
     "prop-types": "^15.8.1",
-    "react": "18.0.0",
-    "react-dom": "18.0.0",
-    "react-native": "0.69.6",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-native": "^0.69.6",
     "react-native-material-dropdown": "github:patlukas/react-native-material-dropdown",
+    "react-native-material-textfield": "github:patlukas/react-native-material-textfield",
     "react-native-web": "~0.18.7",
     "react-redux": "^8.0.4",
     "redux": "^4.2.0"
