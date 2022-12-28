@@ -29,7 +29,7 @@ class Create_Window extends Component {
                     teamPoints: -1,
                     setPoints: []
                 },
-                enemyTeam: -1,
+                enemyTeam: [],
                 inHome: -1,
             },
             results: {
@@ -40,7 +40,7 @@ class Create_Window extends Component {
             },
             numberOfLanes: -1,
             numberOfThrowsInLane: -1,
-            where: -1,
+            where: [],
             comment: "",
             season: ""
         };

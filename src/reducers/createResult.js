@@ -16,7 +16,7 @@ const clearResult = {
             teamPoints: -1,
             setPoints: []
         },
-        enemyTeam: -1,
+        enemyTeam: [],
         inHome: -1,
     },
     results: {
@@ -27,7 +27,7 @@ const clearResult = {
     },
     numberOfLanes: -1,
     numberOfThrowsInLane: -1,
-    where: -1,
+    where: [],
     comment: "",
     season: ""
 };

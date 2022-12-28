@@ -106,7 +106,7 @@ const initialState = [
         name: "Zawody",
         shortName: "Zawody",
         defaultPlace: {
-            trainingPlace: false,
+            trainingPlace: true,
             homePlace: false,
         },
         details: {

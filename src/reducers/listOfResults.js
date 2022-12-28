@@ -17,7 +17,7 @@ const initialState = [
                 teamPoints: 0.5,
                 setPoints: [2, 1, 0, 1, 0]
             },
-            enemyTeam: [false, "z Zerbst"],
+            enemyTeam: [-1, "z Zerbst"],
             inHome: true,
         },
         results: {
@@ -28,7 +28,7 @@ const initialState = [
         },
         numberOfLanes: 4,
         numberOfThrowsInLane: [15, 15],
-        where: [true, "w Gostyniu"],
+        where: [1, "w Gostyniu"],
         comment: "",
         season: "2022/2023"
     },
@@ -50,7 +50,7 @@ const initialState = [
                 teamPoints: 0.5,
                 setPoints: [2, 1, 0, 1, 0]
             },
-            enemyTeam: [false, "z Tarnowem Podgórnym"],
+            enemyTeam: [2, "z Tarnowem Podgórnym"],
             inHome: true,
         },
         results: {
@@ -61,7 +61,7 @@ const initialState = [
         },
         numberOfLanes: 4,
         numberOfThrowsInLane: [15, 15],
-        where: [true, "w Tarnowie Podgórnym"],
+        where: [2, "w Tarnowie Podgórnym"],
         comment: "WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW ",
         season: "2022/2023"
     },
@@ -82,7 +82,7 @@ const initialState = [
         },
         numberOfLanes: 4,
         numberOfThrowsInLane: [15, 15],
-        where: [true, "w Tarnowie Podgórnym"],
+        where: [2, "w Tarnowie Podgórnym"],
         comment: "WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW ",
         season: "2022/2023"
     },
@@ -103,7 +103,7 @@ const initialState = [
         },
         numberOfLanes: 4,
         numberOfThrowsInLane: [15, 15],
-        where: [true, "w Tarnowie Podgórnym"],
+        where: [2, "w Tarnowie Podgórnym"],
         comment: "WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW ",
         season: "2022/2023"
     }
