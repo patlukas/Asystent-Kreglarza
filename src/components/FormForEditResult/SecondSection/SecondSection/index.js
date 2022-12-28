@@ -5,8 +5,9 @@ import PropTypes from 'prop-types';
 import LeaguePointsDropdown from '../LeaguePointsDropdown';
 import HomeOrAwayDropdown from '../HomeOrAwayDropdown';
 import SumTeamInput from '../SumTeamInput';
+import DropdownWithTextInput from '../DropdownWithTextInput';
 
-const SecondSection = ({onChange, resultItem, listOfGameTypes}) => {
+const SecondSection = ({onChange, resultItem, listOfGameTypes, listWhere, listEnemy}) => {
     const {gameType} = resultItem;
 
     const gameTypeObject = getGameTypeObject(listOfGameTypes, gameType.id)
@@ -21,13 +22,30 @@ const SecondSection = ({onChange, resultItem, listOfGameTypes}) => {
                 <LeaguePointsDropdown label={"Punkty setowe"} onChange={(value) => onChange({key: "setPoints", value})} selected={setPoints} sumPoints={sumSetPoints} />
                 <HomeOrAwayDropdown onChange={(value) => onChange({key: "inHome", value})} selected={resultItem.leagueData.inHome} />
                 <SumTeamInput onChange={(value) => onChange({key: "teamSum", value})} value={sum} />
+                <DropdownWithTextInput 
+                    label={"Gdzie:"} labelOfOtherOption={"Inne miejsce"} labelTextInput='Nazwa miejsca'
+                    selected={resultItem.where} 
+                    onChange={(value) => onChange({key: "where", value})} 
+                    listOptions={listWhere} 
+                />
+                <DropdownWithTextInput 
+                    label={"Z kim:"} labelOfOtherOption={"Inny rywal"} labelTextInput='Nazwa rywala'
+                    selected={resultItem.leagueData.enemyTeam} 
+                    onChange={(value) => onChange({key: "enemyTeam", value})} 
+                    listOptions={listEnemy} 
+                />
             </View>
         )
     }
     
     return (
         <>
-            <Text>Druga sekcja nie ligowa</Text>
+            <DropdownWithTextInput 
+                label={"Gdzie:"} labelOfOtherOption={"Inne miejsce"} labelTextInput='Nazwa miejsca'
+                selected={resultItem.where} 
+                onChange={(value) => onChange({key: "where", value})} 
+                listOptions={listWhere} 
+            />
         </>
     ); 
 }
@@ -52,7 +70,9 @@ SecondSection.propTypes = {
 }
 
 const mapStateToProps = state => ({
-    listOfGameTypes: state.listOfGameTypes
+    listOfGameTypes: state.listOfGameTypes,
+    listWhere: state.whereAndEnemy.listWhere,
+    listEnemy: state.whereAndEnemy.listEnemy
 })
 
 export default connect(mapStateToProps, null)(SecondSection);

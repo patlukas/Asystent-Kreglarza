@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import FirstSection from '../FirstSection/FirstSection';
 import SecondSection from '../SecondSection/SecondSection';
+import { onPrepareResultObject } from './script';
 
 class FormForEditResult extends Component {
     constructor(props) {
@@ -32,79 +33,16 @@ class FormForEditResult extends Component {
     }
 
     onPrepareResultItemAfterChange = ({key, value}) => {
-        let wasChange = false;
+        const {listWhere, listEnemy, homePlace, trainingPlace, listOfGameTypes} = this.props
         let editedResult = {...this.props.editedResult};
-        switch(key) {
-            case "clear": 
-                editedResult = {...this.props.initialEditedResult};
-                wasChange = true;
-                break;
-            case "comment":
-                if(editedResult.comment != value) {
-                    editedResult.comment = value;
-                    wasChange = true
-                }
-                break;
-            case "gameType":
-                if(editedResult.gameType.id != value.id) {
-                    editedResult.gameType.id = value.id;
-                    editedResult.gameType.name = value.name;
-                    if(editedResult.date == -1) editedResult.date = this.getTodayDate();
-                    wasChange = true
-                }
-                break;
-            case "date":
-                if(editedResult.date != value) {
-                    editedResult.date = value;
-                    wasChange = true
-                }
-                break;
-            case "teamPoints":
-                if(editedResult.leagueData.team.teamPoints != value) {
-                    editedResult.leagueData.team.teamPoints = value;
-                    wasChange = true
-                }
-                break;
-            case "setPoints":
-                if(editedResult.leagueData.team.setPoints != value) {
-                    editedResult.leagueData.team.setPoints = value;
-                    wasChange = true
-                }
-                break;
-            case "inHome":
-                if(editedResult.leagueData.inHome != value) {
-                    editedResult.leagueData.inHome = value;
-                    wasChange = true
-                }
-                /*
-                    TODO jak
-                        - ustawiono inHome = 1 i nie ustawiono miejsca meczu to
-                            ustaw miejsce meczu na home
-                        - ustawiono in home = 0 i jest już ustwaione miejsce ale nie ma rywala
-                            ustaw rywala na tego z tego miejcea
-                        - ustawioni inhome - 0 i nie ustawiono miejsca ale jest rywal
-                            ustaw miejsce na miejce od rywala
-                            */
-                break;
-            case "teamSum":
-                if(editedResult.leagueData.team.sum != value) {
-                    editedResult.leagueData.team.sum = value;
-                    wasChange = true
-                }
-                break;
-        }
-        if(wasChange) {
-            console.log("Była zmiana", editedResult)
-            this.props.onChange(editedResult)
+        let initialEditedResult = {...this.props.initialEditedResult};
+        let resultObject = onPrepareResultObject(editedResult, key, value, initialEditedResult, listWhere, listEnemy, homePlace, trainingPlace, listOfGameTypes)
+        
+        if(resultObject !== undefined) {
+            console.log("Była zmiana", resultObject)
+            this.props.onChange(resultObject)
         }
         else console.log("Bez zmian", editedResult)
-    }
-
-    getTodayDate = () => {
-        const date = new Date();
-        var dateSting = date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2)+"-"+("0" + date.getDate()).slice(-2);
-        var dateToday = new Date(dateSting);
-        return dateToday.getTime() / (24*3600*1000);
     }
 }
 
@@ -126,7 +64,12 @@ FormForEditResult.propTypes = {
 }
 
 const mapStateToProps = state => ({
-    colors: state.theme.colors
+    colors: state.theme.colors,
+    listWhere: state.whereAndEnemy.listWhere,
+    listEnemy: state.whereAndEnemy.listEnemy,
+    homePlace: state.settings.homePlace,
+    trainingPlace: state.settings.trainingPlace,
+    listOfGameTypes: state.listOfGameTypes
 })
 
 export default connect(mapStateToProps, undefined)(FormForEditResult);
