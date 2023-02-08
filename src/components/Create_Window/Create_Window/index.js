@@ -26,6 +26,7 @@ class Create_Window extends Component {
                     setPoints: [],
                 },
                 player: {
+                    canWinDuel: false,
                     teamPoints: -1,
                     setPoints: []
                 },
@@ -38,8 +39,11 @@ class Create_Window extends Component {
                 zbierane: [],
                 dziury: [],
             },
-            numberOfLanes: -1,
-            numberOfThrowsInLane: -1,
+            lanes: {
+                numberOfLanes: -1,
+                numberOfLanesInForm: -1,
+                numberOfThrowsInLane: []
+            },
             where: [],
             comment: "",
             season: ""
