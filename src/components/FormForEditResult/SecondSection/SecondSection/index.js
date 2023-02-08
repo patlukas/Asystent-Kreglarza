@@ -6,6 +6,8 @@ import LeaguePointsDropdown from '../LeaguePointsDropdown';
 import HomeOrAwayDropdown from '../HomeOrAwayDropdown';
 import SumTeamInput from '../SumTeamInput';
 import DropdownWithTextInput from '../DropdownWithTextInput';
+import HowManyLanesDropdown from '../HowManyLanesDropdown';
+import DuelResultDropdown from '../DuelResultDropdown';
 
 const SecondSection = ({onChange, resultItem, listOfGameTypes, listWhere, listEnemy}) => {
     const {gameType} = resultItem;
@@ -33,6 +35,17 @@ const SecondSection = ({onChange, resultItem, listOfGameTypes, listWhere, listEn
                     selected={resultItem.leagueData.enemyTeam} 
                     onChange={(value) => onChange({key: "enemyTeam", value})} 
                     listOptions={listEnemy} 
+                />
+                <HowManyLanesDropdown 
+                    label={gameTypeObject.howManyLanes.question} 
+                    options={gameTypeObject.howManyLanes.options}
+                    selected={resultItem.gameType.keyHowManyLanes} 
+                    onChange={(value) => onChange({key: "lanes", value})}
+                />
+                <DuelResultDropdown 
+                    canWinDuel={resultItem.leagueData.player.canWinDuel}
+                    selected={resultItem.leagueData.player.teamPoints}
+                    onChange={(value) => onChange({key: "duel", value})}
                 />
             </View>
         )

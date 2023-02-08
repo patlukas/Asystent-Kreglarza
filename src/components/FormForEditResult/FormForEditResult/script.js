@@ -11,10 +11,12 @@ export const onPrepareResultObject = (resultObject, key, value, initialResultObj
         if(resultObject.gameType.id != value.id) {
             resultObject.gameType.id = value.id;
             resultObject.gameType.name = value.name;
+            resultObject.lanes.numberOfThrowsInLane = value.numberOfThrowsInLane
             if(resultObject.date == -1) resultObject.date = getTodayDate();
             if(resultObject.where.length == 0 && defaultPlaceIsTrainingPlace(listOfGameTypes, value.id)) {
                 resultObject.where = trainingPlace
             }
+            resultObject = changeGameType_checkLanes(resultObject, listOfGameTypes)
             return resultObject
         }
     }
@@ -79,6 +81,41 @@ export const onPrepareResultObject = (resultObject, key, value, initialResultObj
             return resultObject
         }
     }
+    else if(key == "lanes") {
+        if(resultObject.gameType.keyHowManyLanes != value.key ||
+            resultObject.lanes.numberOfLanes != value.numberOfLanes ||
+            resultObject.lanes.numberOfLanesInForm != value.numberOfLanesInForm ||
+            resultObject.leagueData.player.canWinDuel != value.canWinDuel) {
+
+            resultObject.gameType.keyHowManyLanes = value.key
+            resultObject.lanes.numberOfLanes = value.numberOfLanes
+            resultObject.lanes.numberOfLanesInForm = value.numberOfLanesInForm
+            resultObject.leagueData.player.canWinDuel = value.canWinDuel
+
+            while(resultObject.results.suma.length < value.numberOfLanesInForm + 1) {
+                resultObject.leagueData.player.setPoints.push(-1)
+                resultObject.results.suma.push(0)
+                resultObject.results.pelne.push(0)
+                resultObject.results.zbierane.push(0)
+                resultObject.results.dziury.push(0)
+            }
+
+            return resultObject
+        }
+    }
+    else if(key == "duel") {
+        if(resultObject.leagueData.player.teamPoints != value) {
+            resultObject.leagueData.player.teamPoints = value
+            if(resultObject.leagueData.player.setPoints[0] == -1) {
+                const val = value ? 1 : 0
+                for(let i=1; i<resultObject.lanes.numberOfLanesInForm+1; i++) {
+                    resultObject.leagueData.player.setPoints[i] = val
+                }
+                resultObject.leagueData.player.setPoints[0] = val * resultObject.lanes.numberOfLanesInForm
+            }
+            return resultObject
+        }
+    }
     return undefined
 }
 
@@ -108,4 +145,25 @@ const defaultPlaceIsTrainingPlace = (listOfGameTypes, idGameType) => {
         if(gameType.id == idGameType) return gameType.defaultPlace.trainingPlace
     }
     return false
+}
+
+const changeGameType_checkLanes = (resultObject, listOfGameTypes) => {
+    for(let gameType of listOfGameTypes) {
+        if(gameType.id == resultObject.gameType.id) {
+            for(let lanes of gameType.howManyLanes.options) {
+                if(lanes.key == resultObject.gameType.keyHowManyLanes) {
+                    if(resultObject.lanes.numberOfLanes == lanes.numberOfLanes &&
+                        resultObject.lanes.numberOfLanesInForm == lanes.numberOfLanesInForm &&
+                        resultObject.leagueData.player.canWinDuel == lanes.canWinDuel) {
+                            return resultObject
+                        }
+                }
+            }
+        }
+    }
+    resultObject.gameType.keyHowManyLanes = -1
+    resultObject.lanes.numberOfLanes = -1
+    resultObject.lanes.numberOfLanesInForm = -1
+    resultObject.leagueData.player.canWinDuel = false
+    return resultObject
 }

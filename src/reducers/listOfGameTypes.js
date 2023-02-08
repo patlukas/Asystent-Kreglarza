@@ -24,7 +24,7 @@ const initialState = [
                     canWinDuel: false
                 },
                 {
-                    key: 4,
+                    key: 3,
                     label: "4 Tory",
                     numberOfLanes: 4,
                     numberOfLanesInForm: 4,
@@ -96,7 +96,7 @@ const initialState = [
                     label: "4 Tory",
                     numberOfLanes: 4,
                     numberOfLanesInForm: 4,
-                    canWinDuel: true
+                    canWinDuel: false
                 }
             ]
         }
