@@ -13,6 +13,7 @@ const clearResult = {
             setPoints: [],
         },
         player: {
+            canWinDuel: false,
             teamPoints: -1,
             setPoints: []
         },
@@ -25,8 +26,11 @@ const clearResult = {
         zbierane: [],
         dziury: [],
     },
-    numberOfLanes: -1,
-    numberOfThrowsInLane: -1,
+    lanes: {
+        numberOfLanes: -1,
+        numberOfLanesInForm: -1,
+        numberOfThrowsInLane: []
+    },
     where: [],
     comment: "",
     season: ""

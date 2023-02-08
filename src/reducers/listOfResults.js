@@ -14,6 +14,7 @@ const initialState = [
                 setPoints: [1, 23],
             },
             player: {
+                canWinDuel: true,
                 teamPoints: 0.5,
                 setPoints: [2, 1, 0, 1, 0]
             },
@@ -26,8 +27,11 @@ const initialState = [
             zbierane: [200, 51, 50, 49, 50],
             dziury: [3, 0, 1, 0, 2],
         },
-        numberOfLanes: 4,
-        numberOfThrowsInLane: [15, 15],
+        lanes: {
+            numberOfLanes: 4,
+            numberOfLanesInForm: 4,
+            numberOfThrowsInLane: [15, 15]
+        },
         where: [1, "w Gostyniu"],
         comment: "",
         season: "2022/2023"
@@ -47,6 +51,7 @@ const initialState = [
                 setPoints: [12.5, 11.5],
             },
             player: {
+                canWinDuel: true,
                 teamPoints: 0.5,
                 setPoints: [2, 1, 0, 1, 0]
             },
@@ -59,8 +64,11 @@ const initialState = [
             zbierane: [200, 51, 50, 49, 50],
             dziury: [3, 0, 1, 0, 2],
         },
-        numberOfLanes: 4,
-        numberOfThrowsInLane: [15, 15],
+        lanes: {
+            numberOfLanes: 4,
+            numberOfLanesInForm: 4,
+            numberOfThrowsInLane: [15, 15]
+        },
         where: [2, "w Tarnowie Podgórnym"],
         comment: "WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW ",
         season: "2022/2023"
@@ -73,15 +81,31 @@ const initialState = [
             keyHowManyLanes: 4
         },
         date: 19306, //liczba dni od 01.01.1970
-        leagueData: null,
+        leagueData: {
+            team: {
+                sum: -1,
+                teamPoints: [],
+                setPoints: [],
+            },
+            player: {
+                canWinDuel: false,
+                teamPoints: -1,
+                setPoints: []
+            },
+            enemyTeam: [],
+            inHome: -1,
+        },
         results: {
             suma: [600, 150, 151, 147, 152],
             pelne: [400, 99, 101, 98, 102],
             zbierane: [200, 51, 50, 49, 50],
             dziury: [3, 0, 1, 0, 2],
         },
-        numberOfLanes: 4,
-        numberOfThrowsInLane: [15, 15],
+        lanes: {
+            numberOfLanes: 4,
+            numberOfLanesInForm: 4,
+            numberOfThrowsInLane: [15, 15]
+        },
         where: [2, "w Tarnowie Podgórnym"],
         comment: "WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW ",
         season: "2022/2023"
@@ -94,15 +118,31 @@ const initialState = [
             keyHowManyLanes: 4
         },
         date: 19306, //liczba dni od 01.01.1970
-        leagueData: null,
+        leagueData: {
+            team: {
+                sum: -1,
+                teamPoints: [],
+                setPoints: [],
+            },
+            player: {
+                canWinDuel: false,
+                teamPoints: -1,
+                setPoints: []
+            },
+            enemyTeam: [],
+            inHome: -1,
+        },
         results: {
             suma: [600, 150, 151, 147, 152],
             pelne: [400, 99, 101, 98, 102],
             zbierane: [200, 51, 50, 49, 50],
             dziury: [3, 0, 1, 0, 2],
         },
-        numberOfLanes: 4,
-        numberOfThrowsInLane: [15, 15],
+        lanes: {
+            numberOfLanes: 4,
+            numberOfLanesInForm: 4,
+            numberOfThrowsInLane: [15, 15]
+        },
         where: [2, "w Tarnowie Podgórnym"],
         comment: "WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW WWWWW ",
         season: "2022/2023"
