@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import FirstSection from '../FirstSection/FirstSection';
 import SecondSection from '../SecondSection/SecondSection';
 import { onPrepareResultObject } from './script';
+import ThirdSection from '../ThirdSection/ThirdSection';
 
 class FormForEditResult extends Component {
     constructor(props) {
@@ -23,6 +24,11 @@ class FormForEditResult extends Component {
                 />
 
                 <SecondSection
+                    onChange={this.onPrepareResultItemAfterChange}
+                    resultItem={editedResult}
+                />
+
+                <ThirdSection
                     onChange={this.onPrepareResultItemAfterChange}
                     resultItem={editedResult}
                 />
