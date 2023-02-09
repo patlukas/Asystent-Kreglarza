@@ -3,14 +3,14 @@ import {View, StyleSheet, Text} from 'react-native';
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 
-const Headline = ({withSetPoints, colors}) => {
+const ResultSum = ({withSetPoints, colors, result}) => {
+    if(result[4] == -1) result[4] = 0;
     const list_width = withSetPoints ? ["20%", "20%", "16%", "21%", "12%"] : ["24%", "24%", "20%", "22%"];
-    const list_label = ['Pełne', 'Zbierane', 'X', 'Suma', 'PS'];
-    let labelComponents = [];
+    let components = [];
     for(let i=0; i<list_width.length; i++) {
-        labelComponents.push(<Text key={i} style={styles.label(list_width[i], colors.form.main)}>{list_label[i]}</Text>)
+        components.push(<Text key={i} style={styles.val(list_width[i], colors.form.second)}>{result[i]}</Text>)
     }
-    return <View style={styles.oneLineContainer}>{labelComponents}</View>
+    return <View style={styles.oneLineContainer}>{components}</View>
 }
 
 const styles = StyleSheet.create({
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap', 
         flexDirection: 'row'
     },
-    label: (width, color) => ({
+    val: (width, color) => ({
         width: width,
         color: color,
         textAlign: 'center',
@@ -28,12 +28,13 @@ const styles = StyleSheet.create({
     }),
 })
 
-Headline.propTypes = {
-    withSetPoints: PropTypes.bool.isRequired
+ResultSum.propTypes = {
+    withSetPoints: PropTypes.bool.isRequired,
+    result: PropTypes.array.isRequired
 }
 
 const mapStateToProps = state => ({
     colors: state.theme.colors
 })
 
-export default connect(mapStateToProps, null)(Headline);
+export default connect(mapStateToProps, null)(ResultSum);

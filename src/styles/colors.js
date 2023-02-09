@@ -34,6 +34,7 @@ const common = {
     },
     form: {
         main: "#ccf",
+        second: "#eee",
         input: "#ff9",
         dataPicker: "#ff9",
         dropdownItemTextSelected: "#777",
