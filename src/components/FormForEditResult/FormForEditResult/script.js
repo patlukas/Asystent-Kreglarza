@@ -93,20 +93,26 @@ export const onPrepareResultObject = (resultObject, key, value, initialResultObj
             resultObject.leagueData.player.canWinDuel = value.canWinDuel
 
             while(resultObject.results.suma.length < value.numberOfLanesInForm + 1) {
-                resultObject.leagueData.player.setPoints.push(-1)
-                resultObject.results.suma.push(0)
-                resultObject.results.pelne.push(0)
-                resultObject.results.zbierane.push(0)
+                resultObject.leagueData.player.setPoints.push(undefined)
+                resultObject.results.suma.push(undefined)
+                resultObject.results.pelne.push(undefined)
+                resultObject.results.zbierane.push(undefined)
                 resultObject.results.dziury.push(0)
             }
-
+            if(value.numberOfLanes > 0) {
+                resultObject.results.pelne[0] = getSumLanesResults(resultObject.results.pelne, value.numberOfLanes)
+                resultObject.results.zbierane[0] = getSumLanesResults(resultObject.results.zbierane, value.numberOfLanes)
+                resultObject.results.dziury[0] = getSumLanesResults(resultObject.results.dziury, value.numberOfLanes)
+                resultObject.results.suma[0] = getSumLanesResults(resultObject.results.suma, value.numberOfLanes)
+                resultObject.leagueData.player.setPoints[0] = getSumLanesResults(resultObject.leagueData.player.setPoints, value.numberOfLanes)
+            }
             return resultObject
         }
     }
     else if(key == "duel") {
         if(resultObject.leagueData.player.teamPoints != value) {
             resultObject.leagueData.player.teamPoints = value
-            if(resultObject.leagueData.player.setPoints[0] == -1) {
+            if(resultObject.leagueData.player.setPoints[0] === undefined) {
                 const val = value ? 1 : 0
                 for(let i=1; i<resultObject.lanes.numberOfLanesInForm+1; i++) {
                     resultObject.leagueData.player.setPoints[i] = val
@@ -115,6 +121,16 @@ export const onPrepareResultObject = (resultObject, key, value, initialResultObj
             }
             return resultObject
         }
+    }
+    else if(key == "results") {
+        for(let i=0; i<value.length; i++) {
+            resultObject.results.pelne[i] = value[i][0]
+            resultObject.results.zbierane[i] = value[i][1]
+            resultObject.results.dziury[i] = value[i][2]
+            resultObject.results.suma[i] = value[i][3]
+            resultObject.leagueData.player.setPoints[i] = value[i][4]
+        }
+        return resultObject
     }
     return undefined
 }
@@ -166,4 +182,14 @@ const changeGameType_checkLanes = (resultObject, listOfGameTypes) => {
     resultObject.lanes.numberOfLanesInForm = -1
     resultObject.leagueData.player.canWinDuel = false
     return resultObject
+}
+
+const getSumLanesResults = (listResult, length) => {
+    let sum = undefined
+    for(let i=1; i<= length; i++) {
+        if(listResult[i] !== undefined) {
+            sum = ((sum === undefined) ? 0 : sum) + listResult[i]
+        }
+    }
+    return sum
 }

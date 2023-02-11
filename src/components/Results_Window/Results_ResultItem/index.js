@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
 import { connect } from "react-redux";
 import {styles} from "./styles";
 
@@ -101,7 +101,7 @@ const TextComment = ({text, colors}) => {
 }
 
 const BasicGame_NumberOfThrowsAndDate = ({colors, item}) => {
-    const {numberOfLanes, numberOfThrowsInLane} = item;
+    const {numberOfLanes, numberOfThrowsInLane} = item.lanes;
     const numberOfThrows = numberOfLanes * (numberOfThrowsInLane[0] + numberOfThrowsInLane[1]);
     return (
         <View style={styles.viewRow}>

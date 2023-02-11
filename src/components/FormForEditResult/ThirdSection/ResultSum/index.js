@@ -4,7 +4,9 @@ import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 
 const ResultSum = ({withSetPoints, colors, result}) => {
-    if(result[4] == -1) result[4] = 0;
+    for(let i=0; i<result.length; i++) {
+        if(result[i] === undefined) result[i] = 0;
+    }
     const list_width = withSetPoints ? ["20%", "20%", "16%", "21%", "12%"] : ["24%", "24%", "20%", "22%"];
     let components = [];
     for(let i=0; i<list_width.length; i++) {
