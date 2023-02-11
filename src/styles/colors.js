@@ -45,7 +45,14 @@ const common = {
         fontHead: "#66f",
         clearBtnBg: "#356",
         clearBtnColor: "#cba",
-        
+    },
+    alert: {
+        optionBackgroundColor: '#1111ff',
+        backgroundColor: '#999999',
+        borderColor: '#55555',
+        titleColor: '#000000',
+        subtitleColor: '#000000',
+        optionColor: '#ffffff'
     }
 };
 
