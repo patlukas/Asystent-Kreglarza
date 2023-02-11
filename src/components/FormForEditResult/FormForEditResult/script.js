@@ -98,10 +98,10 @@ export const onPrepareResultObject = (resultObject, key, value, initialResultObj
             resultObject.leagueData.player.canWinDuel = value.canWinDuel
 
             while(resultObject.results.suma.length < value.numberOfLanesInForm + 1) {
-                resultObject.leagueData.player.setPoints.push(undefined)
-                resultObject.results.suma.push(undefined)
-                resultObject.results.pelne.push(undefined)
-                resultObject.results.zbierane.push(undefined)
+                resultObject.leagueData.player.setPoints.push(null)
+                resultObject.results.suma.push(null)
+                resultObject.results.pelne.push(null)
+                resultObject.results.zbierane.push(null)
                 resultObject.results.dziury.push(0)
             }
             if(value.numberOfLanes > 0) {
@@ -117,7 +117,7 @@ export const onPrepareResultObject = (resultObject, key, value, initialResultObj
     else if(key == "duel") {
         if(resultObject.leagueData.player.teamPoints != value) {
             resultObject.leagueData.player.teamPoints = value
-            if(resultObject.leagueData.player.setPoints[0] === undefined) {
+            if(resultObject.leagueData.player.setPoints[0] === null) {
                 const val = value ? 1 : 0
                 for(let i=1; i<resultObject.lanes.numberOfLanesInForm+1; i++) {
                     resultObject.leagueData.player.setPoints[i] = val
@@ -148,7 +148,7 @@ const getTodayDate = () => {
 }
 
 const getObjectWithChooseIndex = (listObject, index) => {
-    for(obj of listObject) {
+    for(let obj of listObject) {
         if(obj[0] === index) return obj
     }
     return []
@@ -190,10 +190,10 @@ const changeGameType_checkLanes = (resultObject, listOfGameTypes) => {
 }
 
 const getSumLanesResults = (listResult, length) => {
-    let sum = undefined
+    let sum = null
     for(let i=1; i<= length; i++) {
-        if(listResult[i] !== undefined) {
-            sum = ((sum === undefined) ? 0 : sum) + listResult[i]
+        if(listResult[i] !== null) {
+            sum = ((sum === null) ? 0 : sum) + listResult[i]
         }
     }
     return sum

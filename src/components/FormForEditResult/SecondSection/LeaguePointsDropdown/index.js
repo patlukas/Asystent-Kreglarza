@@ -11,7 +11,7 @@ const LeaguePointsDropdown = ({label, selected, sumPoints, onChange, colors}) =>
         data.push({label, value: [i, sumPoints - i], name: label})
         if(i == 0) i = sumPoints + 0.5
     }
-    if(selected.length != 2 || selected[0] + selected[1] != sumPoints) selected = undefined;
+    if(selected.length != 2 || selected[0] + selected[1] != sumPoints) selected = null;
 
     return (
         <View style={styles.container}>

@@ -21,7 +21,7 @@ class DropdownWithTextInput extends Component {
             let labelOption = (option[0] != -1) ? option[1] : labelOfOtherOption
             data.push({label: labelOption, value: option[0], fullValue: option})
         }
-        if(!existSelectedOption || selected.length == 0) selected = [undefined, ""]
+        if(!existSelectedOption || selected.length == 0) selected = [null, ""]
         const dropdown =    <Dropdown
                                 label={label}
                                 data={data}

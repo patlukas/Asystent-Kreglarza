@@ -7,7 +7,7 @@ import {Dropdown} from 'react-native-material-dropdown';
 const DuelResultDropdown = ({canWinDuel, selected, onChange, colors}) => {
     if(!canWinDuel) return null
     const data = [{label: "Wygrana", value: 1}, {label: "Remis", value: 0.5}, {label: "Przegrana", value: 0}]
-    if(selected == -1) selected = undefined
+    if(selected == -1) selected = null
     return (
         <View style={styles.container}>
             <Dropdown

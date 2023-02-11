@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 const ResultSum = ({withSetPoints, colors, result}) => {
     for(let i=0; i<result.length; i++) {
-        if(result[i] === undefined) result[i] = 0;
+        if(result[i] === null) result[i] = 0;
     }
     const list_width = withSetPoints ? ["20%", "20%", "16%", "21%", "12%"] : ["24%", "24%", "20%", "22%"];
     let components = [];

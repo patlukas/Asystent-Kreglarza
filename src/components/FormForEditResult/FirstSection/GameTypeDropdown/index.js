@@ -17,7 +17,7 @@ const GameTypeDropdown = ({colors, listOfGameTypes, selectedGameTypeId, onChange
             isLeague: el.details.isLeague
         }) 
     });
-    if(!existsGameType) selectedGameTypeId = undefined;
+    if(!existsGameType) selectedGameTypeId = null;
 
     return (
         <View style={styles.container}>

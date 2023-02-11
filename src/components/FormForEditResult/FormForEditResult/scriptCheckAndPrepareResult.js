@@ -22,17 +22,17 @@ export const onCheckResultIsComplete = (result, listOfGameTypes) => {
     if(player.canWinDuel && player.teamPoints == -1) return [false, 'Nie wybrano: "Wynik pojedynku"']
     
     for(let i=1; i<=numberOfLanesInForm; i++) {
-        if(results.pelne[i] === undefined) return [false, 'Nie uzupełniono "Pełne" na torze numer '+i]
-        if(results.zbierane[i] === undefined) return [false, 'Nie uzupełniono "Zbierane" na torze numer '+i]
-        if(results.dziury[i] === undefined) return [false, 'Nie uzupełniono "Dziury" na torze numer '+i]
-        if(results.suma[i] === undefined) return [false, 'Nie uzupełniono "Suma" na torze numer '+i]
-        if(gameType.isLeague && player.setPoints[i] === undefined) return [false, 'Nie uzupełniono "PS" na torze numer '+i]
+        if(results.pelne[i] === null) return [false, 'Nie uzupełniono "Pełne" na torze numer '+i]
+        if(results.zbierane[i] === null) return [false, 'Nie uzupełniono "Zbierane" na torze numer '+i]
+        if(results.dziury[i] === null) return [false, 'Nie uzupełniono "Dziury" na torze numer '+i]
+        if(results.suma[i] === null) return [false, 'Nie uzupełniono "Suma" na torze numer '+i]
+        if(gameType.isLeague && player.setPoints[i] === null) return [false, 'Nie uzupełniono "PS" na torze numer '+i]
     }
-    if(results.pelne[0] === undefined) return [false, 'Nie uzupełniono "Pełne" w końcowym wyniku']
-    if(results.zbierane[0] === undefined) return [false, 'Nie uzupełniono "Zbierane" w końcowym wyniku']
-    if(results.dziury[0] === undefined) return [false, 'Nie uzupełniono "Dziury" w końcowym wyniku']
-    if(results.suma[0] === undefined) return [false, 'Nie uzupełniono "Suma" w końcowym wyniku']
-    if(gameType.isLeague && player.setPoints[0] === undefined) return [false, 'Nie uzupełniono "PS" w końcowym wyniku']
+    if(results.pelne[0] === null) return [false, 'Nie uzupełniono "Pełne" w końcowym wyniku']
+    if(results.zbierane[0] === null) return [false, 'Nie uzupełniono "Zbierane" w końcowym wyniku']
+    if(results.dziury[0] === null) return [false, 'Nie uzupełniono "Dziury" w końcowym wyniku']
+    if(results.suma[0] === null) return [false, 'Nie uzupełniono "Suma" w końcowym wyniku']
+    if(gameType.isLeague && player.setPoints[0] === null) return [false, 'Nie uzupełniono "PS" w końcowym wyniku']
     return [true, ""]
 }
 
@@ -43,7 +43,7 @@ export const onPrepareResultsToSave = (result) => {
         result.leagueData.enemyTeam = []
         result.leagueData.inHome = -1
         let setPoints = []
-        for(let i=0; i<= result.lanes.numberOfLanesInForm; i++) setPoints.push(undefined)
+        for(let i=0; i<= result.lanes.numberOfLanesInForm; i++) setPoints.push(null)
         result.leagueData.player.setPoints = setPoints 
     }
     if(!result.leagueData.player.canWinDuel) result.leagueData.player.teamPoints = -1

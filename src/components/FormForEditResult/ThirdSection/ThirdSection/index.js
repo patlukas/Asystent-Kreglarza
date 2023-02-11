@@ -46,10 +46,10 @@ const functionBeforeOnChange = (index, rowResults, listResults, onChange) => {
     listResults[index] = rowResults
     if(index > 0) {
         for(let i=0; i<5; i++) {
-            let sum = undefined
+            let sum = null
             for(let j=1; j<listResults.length; j++) {
-                if(listResults[j][i] !== undefined) {
-                    sum = ((sum === undefined) ? 0 : sum) + listResults[j][i]
+                if(listResults[j][i] !== null) {
+                    sum = ((sum === null) ? 0 : sum) + listResults[j][i]
                 }
             }
             listResults[0][i] = sum

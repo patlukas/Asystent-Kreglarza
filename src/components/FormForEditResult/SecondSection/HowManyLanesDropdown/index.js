@@ -6,7 +6,7 @@ import {Dropdown} from 'react-native-material-dropdown';
 
 const HowManyLanesDropdown = ({label, options, selected, onChange, colors}) => {
     let data = []
-    let selected_checked = undefined
+    let selected_checked = null
     for(let option of options) {
         if(selected === option.key) selected_checked = selected
         data.push({label: option.label, value: option.key, fullValue: option})

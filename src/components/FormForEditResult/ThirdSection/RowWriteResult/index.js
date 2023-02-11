@@ -9,7 +9,7 @@ class RowWriteResult extends Component {
         super(props);
         this.state = {
             resultState: this.props.result,
-            idElEditedBySum: undefined
+            idElEditedBySum: null
         }
         this.setResultState = this.setResultState.bind(this)
         this.setStateIdElEditedBySum = this.setStateIdElEditedBySum.bind(this)
@@ -60,7 +60,7 @@ const NumberInput = ({value, width, colors, max, onChange, selectTextOnFocus=fal
     const startChange = (newVal) => {
         newVal = newVal.replace("-", "").replace(".", "").replace(",", "").replace(" ", "")
         newVal= parseInt(newVal)
-        if(isNaN(newVal) || newVal < 0) newVal = undefined
+        if(isNaN(newVal) || newVal < 0) newVal = null
         else if(newVal > max) newVal = value
         onChange(newVal)
     }
@@ -78,9 +78,9 @@ const NumberInput = ({value, width, colors, max, onChange, selectTextOnFocus=fal
 
 const SumComponent = ({results, width, colors, elMax, idElEditedBySum,  onChange, setStateIdElEditedBySum}) => {
     if(width == "0%") return null;
-    const editId0 = (results[0] === undefined && results[1] !== undefined)
-    const editId1 = (results[0] !== undefined && results[1] === undefined)
-    if(idElEditedBySum !== undefined || editId0 || editId1) {
+    const editId0 = (results[0] === null && results[1] !== null)
+    const editId1 = (results[0] !== null && results[1] === null)
+    if(idElEditedBySum !== null || editId0 || editId1) {
         if(editId0) idElEditedBySum = 0
         else if(editId1) idElEditedBySum = 1
         return <NumberInput 
@@ -89,12 +89,12 @@ const SumComponent = ({results, width, colors, elMax, idElEditedBySum,  onChange
             width={width} 
             onChange={onChange} 
             selectTextOnFocus={true} 
-            onEndEditing={() => setStateIdElEditedBySum(undefined)}
+            onEndEditing={() => setStateIdElEditedBySum(null)}
             onFocus={() => setStateIdElEditedBySum(idElEditedBySum)}
             max={elMax + results[1-idElEditedBySum]}
         />
     } 
-    const value = (results[3] === undefined) ? 0 : results[3]
+    const value = (results[3] === null) ? 0 : results[3]
     return <Text style={[styles.textSum(width, colors.form.second), styles.cell]}>{value}</Text>
 }
 
@@ -126,13 +126,12 @@ const funcBeforeOnChange = (index, value, results, onChange, setResultState, idE
         return
     }
     results[index] = value
-    const valIsUndefined = [results[0] === undefined, results[1] === undefined]
     if(index == 0 || index == 1) {
-        results[3] = (valIsUndefined[0] ? 0 : results[0]) + (valIsUndefined[1] ? 0 : results[1])
+        results[3] = (results[0] === null ? 0 : results[0]) + (results[1] === null ? 0 : results[1])
     }
-    else if(index == 3 && idElEditedBySum !== undefined) {
+    else if(index == 3 && idElEditedBySum !== null) {
         if(results[3] > results[1-idElEditedBySum]) results[idElEditedBySum] = results[3] - results[1-idElEditedBySum]
-        else results[idElEditedBySum] = undefined
+        else results[idElEditedBySum] = null
     }
     onChange(results)
 } 

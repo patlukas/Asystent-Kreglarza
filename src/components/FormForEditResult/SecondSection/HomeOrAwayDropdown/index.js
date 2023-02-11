@@ -6,7 +6,7 @@ import {Dropdown} from 'react-native-material-dropdown';
 
 const HomeOrAwayDropdown = ({selected, onChange, colors}) => {
     var data = [{label: "W Domu", value: 1}, {label: "Na Wyjeździe", value: 0} ];
-    if(selected != 0 && selected != 1) selected = undefined;
+    if(selected != 0 && selected != 1) selected = null;
 
     return (
         <View style={styles.container}>

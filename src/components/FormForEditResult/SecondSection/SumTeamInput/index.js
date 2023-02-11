@@ -36,7 +36,7 @@ class SumTeamInput extends Component {
                     keyboardType='numeric'
                     value={value}
                     onEndEditing={(event) => this.beforeChange(event.nativeEvent.text)}                
-                    label='Suma Drużyny'
+                    label='Suma drużyny'
                     maxLength={5}
                     formatText={this.formatText}
                     textColor={colors.form.input}
