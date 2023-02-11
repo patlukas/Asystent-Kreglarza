@@ -4,7 +4,8 @@ const initialState = [
         gameType: {
             id: 1,
             name: "Superliga",
-            keyHowManyLanes: 4
+            keyHowManyLanes: 4,
+            isLeague: true
         },
         date: 19302, //liczba dni od 01.01.1970
         leagueData: {
@@ -41,7 +42,8 @@ const initialState = [
         gameType: {
             id: 2,
             name: "Superliga",
-            keyHowManyLanes: 4
+            keyHowManyLanes: 4,
+            isLeague: true
         },
         date: 19305, //liczba dni od 01.01.1970
         leagueData: {
@@ -78,7 +80,8 @@ const initialState = [
         gameType: {
             id: 3,
             name: "Zawody",
-            keyHowManyLanes: 4
+            keyHowManyLanes: 4,
+            isLeague: true
         },
         date: 19306, //liczba dni od 01.01.1970
         leagueData: {
@@ -115,7 +118,8 @@ const initialState = [
         gameType: {
             id: 4,
             name: "Trening",
-            keyHowManyLanes: 4
+            keyHowManyLanes: 4,
+            isLeague: false
         },
         date: 19306, //liczba dni od 01.01.1970
         leagueData: {
@@ -153,6 +157,13 @@ const resultsList = function (state = initialState, action) {
     switch (action.type) {
         case "GET_LIST":
             return state;
+        case "CREATE_NEW_RESULT":
+            let newResult = action.payload.resultItem
+            let newId = 1
+            state.forEach((el) => {if(el.id >= newId) newId = el.id+1})
+            newResult.id = newId
+            state.push(newResult)
+            return state
         default:
             return state;
     }

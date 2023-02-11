@@ -12,7 +12,11 @@ export const onPrepareResultObject = (resultObject, key, value, initialResultObj
             resultObject.gameType.id = value.id;
             resultObject.gameType.name = value.name;
             resultObject.lanes.numberOfThrowsInLane = value.numberOfThrowsInLane
-            if(resultObject.date == -1) resultObject.date = getTodayDate();
+            resultObject.gameType.isLeague = value.isLeague
+            if(resultObject.date == -1) {
+                resultObject.date = getTodayDate();
+                resultObject.season = getSeason(resultObject.date)
+            }
             if(resultObject.where.length == 0 && defaultPlaceIsTrainingPlace(listOfGameTypes, value.id)) {
                 resultObject.where = trainingPlace
             }
@@ -23,6 +27,7 @@ export const onPrepareResultObject = (resultObject, key, value, initialResultObj
     else if (key == "date") {
         if(resultObject.date != value) {
             resultObject.date = value;
+            resultObject.season = getSeason(value)
             return resultObject
         }
     }
@@ -192,4 +197,11 @@ const getSumLanesResults = (listResult, length) => {
         }
     }
     return sum
+}
+
+const getSeason = (dateInt) => {
+    var date = new Date(dateInt * 1000 * 3600 * 24);
+    let yearLeft = date.getFullYear()
+    if(date.getMonth() <= 6) yearLeft -= 1
+    return String(yearLeft) + "/" + String(yearLeft+1)
 }

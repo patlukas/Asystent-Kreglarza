@@ -9,7 +9,13 @@ const GameTypeDropdown = ({colors, listOfGameTypes, selectedGameTypeId, onChange
     let existsGameType = false;
     listOfGameTypes.forEach(el => { 
         if(selectedGameTypeId == el.id) existsGameType = true;
-        data.push({ label: el.name, value: el.id, name: el.shortName, numberOfThrowsInLane: el.numberOfThrowsInLane}) 
+        data.push({ 
+            label: el.name, 
+            value: el.id, 
+            name: el.shortName, 
+            numberOfThrowsInLane: el.numberOfThrowsInLane,
+            isLeague: el.details.isLeague
+        }) 
     });
     if(!existsGameType) selectedGameTypeId = undefined;
 
@@ -24,7 +30,12 @@ const GameTypeDropdown = ({colors, listOfGameTypes, selectedGameTypeId, onChange
                 pickerStyle={{backgroundColor: colors.form.dropdownPickerBackground}}
                 value={selectedGameTypeId}
                 itemCount={5.35}
-                onChangeText={(_, index) => onChange({name: data[index].name, id: data[index].value, numberOfThrowsInLane: data[index].numberOfThrowsInLane})}
+                onChangeText={(_, index) => onChange({
+                    name: data[index].name, 
+                    id: data[index].value, 
+                    numberOfThrowsInLane: data[index].numberOfThrowsInLane,
+                    isLeague: data[index].isLeague
+                })}
                 fontSize={14}
             />
         </View>

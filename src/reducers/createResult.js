@@ -3,7 +3,8 @@ const clearResult = {
     gameType: {
         id: -1,
         name: "",
-        keyHowManyLanes: -1
+        keyHowManyLanes: -1,
+        isLeague: false
     },
     date: -1, //liczba dni od 01.01.1970
     leagueData: {

@@ -1,22 +1,24 @@
 import React, {Component} from 'react';
 import { connect } from "react-redux";
-import { onSelectWindow, onEditCreateResult } from '../../../actions';
+import { onSelectWindow, onEditCreateResult, onCreateNewResult } from '../../../actions';
+import AlertOneOption from '../../Alerty/AlertOneOption';
 import BarTopTwoBtn from '../../BarTopTwoBtn';
-import FormForEditResult from '../../FormForEditResult/FormForEditResult';
+import FormForEditResult, {checkResultIsComplete, prepareResultsToSave} from '../../FormForEditResult/FormForEditResult';
 import MenuBar from '../../MenuBar';
 
 class Create_Window extends Component {
     constructor(props) {
         super(props);
-    }
-    render() {
-        const {onSelectWindow, createResult, onEditCreateResult} = this.props;
-        const clearResult = {
+        this.state = {
+            showAlertSave: false
+        }
+        this.clearResult = {
             id: -1,
             gameType: {
                 id: -1,
                 name: "",
-                keyHowManyLanes: -1
+                keyHowManyLanes: -1,
+                isLeague: false
             },
             date: -1, //liczba dni od 01.01.1970
             leagueData: {
@@ -48,32 +50,57 @@ class Create_Window extends Component {
             comment: "",
             season: ""
         };
+        this.onCreateResult = this.onCreateResult.bind(this)
+    }
+    render() {
+        const {onSelectWindow, createResult, onEditCreateResult} = this.props;
         return (
             <>
                 <BarTopTwoBtn 
-                    leftBtnTitle="Powrót" leftBtnOnPress={() => {onSelectWindow(1)}}
-                    rightBtnTitle="Zapisz" rightBtnOnPress={() => {console.log("Tworzenie")}}
+                    leftBtnTitle="Powrót" leftBtnOnPress={() => onSelectWindow(1)}
+                    rightBtnTitle="Zapisz" rightBtnOnPress={this.onCreateResult}
                 />
                 <FormForEditResult 
-                    title={"New Wynik"}
-                    nameClearButton={"Wyczyść formularz"} 
+                    title="Tworzenie wyniku"
+                    nameClearButton="Wyczyść formularz"
                     onChange={onEditCreateResult}
                     editedResult={createResult}
-                    initialEditedResult={clearResult}
+                    initialEditedResult={this.clearResult}
                 />
                 <MenuBar />
+                <AlertOneOption 
+                    visible={this.state.showAlertSave}
+                    onPress={() => this.setState({showAlertSave: false})}
+                    title="Brakujące dane"
+                    subtitle={this.state.subtitleAlertSave}
+                    optionName="Zamknij powiadomienie"
+                />
             </>
         );
+    }
+    onCreateResult() {
+        const {createResult, listOfGameTypes, onCreateNewResult, onEditCreateResult, onSelectWindow} = this.props
+        const checkResult = checkResultIsComplete(createResult, listOfGameTypes)
+        if(!checkResult[0]) {
+            this.setState({showAlertSave: true, subtitleAlertSave: checkResult[1]})
+            return
+        }
+        prepareResultsToSave(createResult)
+        onCreateNewResult(createResult)
+        onEditCreateResult(this.clearResult)
+        onSelectWindow(1)
     }
 }
 
 const mapStateToProps = state => ({
-    createResult: state.createResult
+    createResult: state.createResult,
+    listOfGameTypes: state.listOfGameTypes
 })
 
 const mapDispatchToProps = dispatch => ({
     onSelectWindow: (windowId) => dispatch(onSelectWindow(windowId)),
     onEditCreateResult: (resultItem) => dispatch(onEditCreateResult(resultItem)),
+    onCreateNewResult: (resultItem) => dispatch(onCreateNewResult(resultItem))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Create_Window);

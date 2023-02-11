@@ -18,3 +18,10 @@ export const onEditCreateResult = function(resultItem) {
         payload: {resultItem}
     }
 }
+
+export const onCreateNewResult = function(resultItem) {
+    return {
+        type: 'CREATE_NEW_RESULT',
+        payload: {resultItem}
+    }
+}

@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import {Text, StyleSheet, ScrollView} from 'react-native';
+import {Text, StyleSheet, ScrollView, View} from 'react-native';
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import FirstSection from '../FirstSection/FirstSection';
 import SecondSection from '../SecondSection/SecondSection';
 import { onPrepareResultObject } from './script';
 import ThirdSection from '../ThirdSection/ThirdSection';
+import { onCheckResultIsComplete, onPrepareResultsToSave } from './scriptCheckAndPrepareResult';
 
 class FormForEditResult extends Component {
     constructor(props) {
@@ -22,18 +23,15 @@ class FormForEditResult extends Component {
                     onChange={this.onPrepareResultItemAfterChange}
                     resultItem={editedResult}
                 />
-
                 <SecondSection
                     onChange={this.onPrepareResultItemAfterChange}
                     resultItem={editedResult}
                 />
-
                 <ThirdSection
                     onChange={this.onPrepareResultItemAfterChange}
                     resultItem={editedResult}
                 />
-                
-                <Text style={{height: 200}}>TODO dalsza część formularza</Text>
+                <View style={{height: 80}}/>
             </ScrollView>
         );
     }
@@ -43,14 +41,12 @@ class FormForEditResult extends Component {
         let editedResult = {...this.props.editedResult};
         let initialEditedResult = {...this.props.initialEditedResult};
         let resultObject = onPrepareResultObject(editedResult, key, value, initialEditedResult, listWhere, listEnemy, homePlace, trainingPlace, listOfGameTypes)
-        
-        if(resultObject !== undefined) {
-            console.log("Była zmiana", resultObject)
-            this.props.onChange(resultObject)
-        }
-        else console.log("Bez zmian", editedResult)
+        if(resultObject !== undefined) this.props.onChange(resultObject)
     }
 }
+
+export const checkResultIsComplete = onCheckResultIsComplete
+export const prepareResultsToSave = onPrepareResultsToSave
 
 const styles = StyleSheet.create({
     title: (colors) => ({
