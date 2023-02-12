@@ -4,7 +4,10 @@ export const styles = StyleSheet.create({
     container: (gameTypeId, colors) => ({
         backgroundColor: colors.gameType[gameTypeId],
         paddingTop: 7,
-        paddingBottom: 7
+        paddingBottom: 7,
+        borderColor: colors.listResultsBorder,
+        borderBottomWidth: 3,
+        borderTopWidth: 3
     }),
     headText: (colors)=> ({
         color: colors.font.basic,

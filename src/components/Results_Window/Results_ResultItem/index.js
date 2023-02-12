@@ -147,7 +147,4 @@ const mapStateToProps = state => ({
     colors: state.theme.colors
 })
 
-const mapDispatchToProps = dispatch => ({
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Results_ResultItem);
+export default connect(mapStateToProps, undefined)(Results_ResultItem);

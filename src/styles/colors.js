@@ -20,6 +20,7 @@ const common = {
         3: CLOUDS,
         4: EMERALD
     },
+    listResultsBorder: GRAY,
     font: {
         basic: MIDNIGHT_BLUE,
         notImportant: GRAY,
