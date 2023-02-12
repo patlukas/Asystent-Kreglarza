@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const clearResult = {
     id: -1,
     gameType: {
@@ -39,11 +40,18 @@ const clearResult = {
 
 const initialState = {...clearResult};
 
+const save = async (value) => {
+    try {await AsyncStorage.setItem('@createResult', JSON.stringify(value))
+    } catch (e) {console.log(e)}
+}
+
 const createResult = function (state = initialState, action) {
     switch (action.type) {
+        case "SET_CREATE_RESULT":
+            return action.payload.createResult
         case "EDIT_CREATE_RESULT":
-            console.log("EDYCJA")
             let stateNew = {...action.payload.resultItem}
+            save(stateNew)
             return stateNew;
         default:
             return state;

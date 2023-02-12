@@ -1,4 +1,7 @@
-const initialState = [
+import AsyncStorage from '@react-native-async-storage/async-storage';
+const initialState = []
+
+const exampleState = [
     {
         id: 1,
         gameType: {
@@ -153,17 +156,24 @@ const initialState = [
     }
 ]
 
+const save = async (value) => {
+    try {await AsyncStorage.setItem('@listOfResults', JSON.stringify(value))
+    } catch (e) {console.log(e)}
+}
+
 const resultsList = function (state = initialState, action) {
     switch (action.type) {
-        case "GET_LIST":
-            return state;
+        case "SET_LIST_RESULTS":
+            return action.payload.listOfResults
         case "CREATE_NEW_RESULT":
+            var newState = [...state]
             let newResult = action.payload.resultItem
             let newId = 1
-            state.forEach((el) => {if(el.id >= newId) newId = el.id+1})
+            newState.forEach((el) => {if(el.id >= newId) newId = el.id+1})
             newResult.id = newId
-            state.push(newResult)
-            return state
+            newState.push(newResult)
+            save(newState)
+            return newState
         default:
             return state;
     }

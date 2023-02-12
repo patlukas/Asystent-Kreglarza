@@ -3,18 +3,23 @@ import { Text, Button, Animated} from 'react-native';
 import MenuBar from '../MenuBar';
 import {styles} from "./styles";
 import {connect} from "react-redux";
-import { onChangeTheme } from '../../actions';
+import { onChangeTheme, onSetTheme, onSetListOfResults, onSetCreateResult } from '../../actions';
 import Results_Window from '../Results_Window/Results_Window';
 import Create_Window from '../Create_Window/Create_Window';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 class App extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            showSplashScreen: true
+        }
+        this.loadDataFromLocalStorage()
     }
     render () {
         const {selectedWindow, colors, onChangeTheme} = this.props;
-
+        if(this.state.showSplashScreen) return <Text>Splash screen</Text>
         switch(selectedWindow) {
             case 1: 
                 return <Animated.View style={styles.container(colors)}><Results_Window/></Animated.View>
@@ -30,6 +35,17 @@ class App extends React.Component {
                 )
         }
     }
+    async loadDataFromLocalStorage () {
+        try {
+            const theme = await AsyncStorage.getItem('@theme')
+            const listOfResults = await AsyncStorage.getItem('@listOfResults')
+            const createResult = await AsyncStorage.getItem('@createResult')
+            if(theme !== null) this.props.onSetTheme(theme)
+            if(listOfResults !== null) this.props.onSetListOfResults(JSON.parse(listOfResults))
+            if(createResult !== null) this.props.onSetCreateResult(JSON.parse(createResult))
+            this.setState({showSplashScreen: false})
+        } catch(e) {console.log(e)}
+    }
 }
 
 const mapStateToProps = state => ({
@@ -38,7 +54,10 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  onChangeTheme: () => dispatch(onChangeTheme())
+    onChangeTheme: () => dispatch(onChangeTheme()),
+    onSetTheme: (theme) => dispatch(onSetTheme(theme)),
+    onSetListOfResults: (listOfResults) => dispatch(onSetListOfResults(listOfResults)),
+    onSetCreateResult: (createResult) => dispatch(onSetCreateResult(createResult))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
