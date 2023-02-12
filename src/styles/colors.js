@@ -53,7 +53,11 @@ const common = {
         borderColor: '#55555',
         titleColor: '#000000',
         subtitleColor: '#000000',
-        optionColor: '#ffffff'
+        optionColor: '#ffffff',
+        noBgColor: '#ee0000',
+        yesBgColor: '#009900',
+        noColor: '#ffffff',
+        yesColor: '#ffffff'
     }
 };
 
