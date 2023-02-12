@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import {FlatList, View, Text, StyleSheet} from 'react-native';
 import { connect } from "react-redux";
+import { onDeleteResult } from '../../../actions';
+import AlertTwoOption from '../../Alerty/AlertTwoOption';
+import Edit_Window from '../../Edit_Window';
 import MenuBar from '../../MenuBar';
 import Results_ButtonAddNewResult from '../Results_ButtonAddNewResult';
 import Results_ResultItem from '../Results_ResultItem';
@@ -8,16 +11,35 @@ import Results_ResultItem from '../Results_ResultItem';
 class Results_Window extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            editedResult: null,
+            idDeleteResult: null
+        }
+        this.beforeOnDeleteResult = this.beforeOnDeleteResult.bind(this)
     }
     render() {
         const {listOfResults, colors} = this.props;
         let code = []
+        if(this.state.editedResult !== null) {
+            return(
+                <Edit_Window 
+                    editedResult={this.state.editedResult}
+                    onEndEdit={() => this.setState({editedResult: null})}
+                />
+            )
+        }
         if(listOfResults.length == 0) code.push(<WelcomeWindow key={0} color={colors.TEXT} colorSecond={colors.TEXT_SECONDARY}/>)
         else code.push(
             <FlatList 
                 key={0}
                 data={listOfResults} 
-                renderItem={({item}) => <Results_ResultItem item={item} />}
+                renderItem={({item}) => 
+                    <Results_ResultItem 
+                        item={item} 
+                        onDeleteResult={() => this.setState({idDeleteResult: item.id})} 
+                        onEditResult={() => this.setState({editedResult: item})}
+                    />
+                }
                 contentContainerStyle={{ paddingBottom: 87 }}
             />
         )
@@ -29,8 +51,19 @@ class Results_Window extends Component {
                     <Results_ButtonAddNewResult />
                 </View>
                 <MenuBar />
+                <AlertTwoOption
+                    visible={this.state.idDeleteResult !== null}
+                    title="Czy na pewno chcesz usunąć wynik?"
+                    onPressNo={() => this.setState({idDeleteResult: null})}
+                    onPressYes={this.beforeOnDeleteResult}
+                />
             </>
         );
+    }
+
+    beforeOnDeleteResult = () => {
+        this.props.onDeleteResult(this.state.idDeleteResult)
+        this.setState({idDeleteResult: null})
     }
 }
 
@@ -75,4 +108,8 @@ const mapStateToProps = state => ({
     colors: state.theme.colors
 })
 
-export default connect(mapStateToProps, undefined)(Results_Window);
+const mapDispatchToProps = dispatch => ({
+    onDeleteResult: (idDeleteResult) => dispatch(onDeleteResult(idDeleteResult))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Results_Window);

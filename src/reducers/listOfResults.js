@@ -165,6 +165,28 @@ const resultsList = function (state = initialState, action) {
     switch (action.type) {
         case "SET_LIST_RESULTS":
             return action.payload.listOfResults
+        case "DELETE_RESULT":
+            const {idDeleteResult} = action.payload
+            var newState = [...state]
+            for(let i=0; i<newState.length; i++) {
+                if(newState[i].id === idDeleteResult) {
+                    newState.splice(i, 1)
+                    break
+                }
+            }
+            save(newState)
+            return newState
+        case "SAVE_EDIT_RESULT":
+            const {resultAfterEdit} = action.payload
+            var newState = [...state]
+            for(let i=0; i<newState.length; i++) {
+                if(newState[i].id === resultAfterEdit.id) {
+                    newState[i] = resultAfterEdit
+                    break
+                }
+            }
+            save(newState)
+            return newState
         case "CREATE_NEW_RESULT":
             var newState = [...state]
             let newResult = action.payload.resultItem

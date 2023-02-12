@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View} from 'react-native';
+import {Text, View, Button} from 'react-native';
 import { connect } from "react-redux";
 import {styles} from "./styles";
 
@@ -8,7 +8,7 @@ class Results_ResultItem extends Component {
         super(props);
     }
     render() {
-        const {item, colors} = this.props;
+        const {item, colors, onEditResult, onDeleteResult} = this.props;
         switch(item.gameType.id) {
             case 1:
             case 2:
@@ -20,6 +20,8 @@ class Results_ResultItem extends Component {
                         <League_ResultOfDuel colors={colors} result={item.leagueData.player.teamPoints} />
                         <League_PlayerResults colors={colors} item={item} />
                         <TextComment colors={colors} text={item.comment}/>
+                        <Button onPress={onEditResult} title="Edytuj" />
+                        <Button onPress={onDeleteResult} title="Usuń" />
                     </View>
                 )
             case 3:
@@ -30,6 +32,8 @@ class Results_ResultItem extends Component {
                         <BasicGame_NumberOfThrowsAndDate colors={colors} item={item} />
                         <BasicGame_PlayerResults colors={colors} item={item} />
                         <TextComment colors={colors} text={item.comment}/>
+                        <Button onPress={onEditResult} title="Edytuj" />
+                        <Button onPress={onDeleteResult} title="Usuń" />
                     </View>
                 )
         }

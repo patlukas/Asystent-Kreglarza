@@ -1,7 +1,6 @@
-export const onPrepareResultObject = (resultObject, key, value, initialResultObject, listWhere, listEnemy, 
+export const onPrepareResultObject = (resultObject, key, value, listWhere, listEnemy, 
                                         homePlace, trainingPlace, listOfGameTypes) => {
-    if(key == "clear") return initialResultObject;
-    else if(key == "comment") {
+    if(key == "comment") {
         if(resultObject.comment != value) {
             resultObject.comment = value;
             return resultObject

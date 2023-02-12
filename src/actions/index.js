@@ -26,3 +26,11 @@ export const onSetListOfResults = function(listOfResults) {
 export const onSetCreateResult = function(createResult) {
     return {type: 'SET_CREATE_RESULT', payload: {createResult}}
 }
+
+export const onSaveEditResult = function(resultAfterEdit) {
+    return {type: 'SAVE_EDIT_RESULT', payload: {resultAfterEdit}}
+}
+
+export const onDeleteResult = function(idDeleteResult) {
+    return {type: 'DELETE_RESULT', payload: {idDeleteResult}}
+}
