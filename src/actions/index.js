@@ -34,3 +34,13 @@ export const onSaveEditResult = function(resultAfterEdit) {
 export const onDeleteResult = function(idDeleteResult) {
     return {type: 'DELETE_RESULT', payload: {idDeleteResult}}
 }
+
+export const onSetHomePlace = function(homePlace) {
+    return {type: 'SET_HOME_PLACE', payload: {homePlace}}
+}
+export const onSetTrainingPlace = function(trainingPlace) {
+    return {type: 'SET_TRAINING_PLACE', payload: {trainingPlace}}
+}
+export const onLoadSettings = function(settings) {
+    return {type: 'LOAD_SETTINGS', payload: {settings}}
+}

@@ -16,7 +16,7 @@ class DropdownWithTextInput extends Component {
         let {colors, selected, listOptions, label, labelOfOtherOption, onChange, labelTextInput} = this.props;
         let data = []
         let existSelectedOption = false
-        for(option of listOptions) {
+        for(let option of listOptions) {
             if(selected.length == 2 && selected[0] === option[0]) existSelectedOption = true
             let labelOption = (option[0] != -1) ? option[1] : labelOfOtherOption
             data.push({label: labelOption, value: option[0], fullValue: option})

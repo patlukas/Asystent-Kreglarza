@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {colors} from "../styles/colors";
 
 const initialState = {
-    listTheme: [],
+    listTheme: ["dark", "light"],
     selectedTheme: "dark",
     colors: {}
 }
@@ -18,6 +18,7 @@ const theme = (state = initialState, action) => {
             var stateNew = {...state}
             stateNew.selectedTheme = action.payload.theme
             stateNew.colors = colors[stateNew.selectedTheme];
+            save(stateNew.selectedTheme)
             return stateNew
         case "CHANGE_THEME":
             var stateNew = {...state};
