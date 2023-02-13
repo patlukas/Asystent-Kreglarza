@@ -1,42 +1,94 @@
 import React, {Component} from 'react';
-import {Text, View, Button} from 'react-native';
+import {Animated, Text, View, PanResponder} from 'react-native';
 import { connect } from "react-redux";
+import AdditionalOption from '../AdditionalOption';
 import {styles} from "./styles";
 
-class Results_ResultItem extends Component {
+class ResultItem extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            left: 0,
+            dx: 0,
+            timeStartTouch: null
+        }
+        this.panResponderMain = PanResponder.create({
+            onStartShouldSetPanResponder: () => {
+                this.setState({timeStartTouch: Date.now()})
+                return false
+            },
+            onMoveShouldSetPanResponder: (_, gestureState) => {
+                if(gestureState.dx > 8 || gestureState.dx < -8) return true
+                if(this.state.timeStartTouch !== null && Date.now() - this.state.timeStartTouch > 500 && this.state.left == 0) {
+                    this.setState({left: -161, dx: 0, timeStartTouch: null})
+                    return true
+                } 
+                return false
+            },
+            onPanResponderMove: (_, gestureState) => {
+                const {dx, vx} = gestureState
+                let move = dx - this.state.dx
+                if(vx > 3 || vx < -3) move *= 8
+                else if(vx > 2 || vx < -2) move *= 4
+                else if(vx > 1 || vx < -1) move *= 2
+                let left = this.state.left + move
+                if(left < -200) left = -200
+                else if(left > 0) left = 0
+                this.setState({left, dx})
+            },
+            onPanResponderRelease: this.onEndTouch,
+            onPanResponderTerminate: this.onEndTouch,
+        })
+        this.panResponderClose = PanResponder.create({
+            onStartShouldSetPanResponder: () => {
+                this.setState({timeStartTouch: Date.now()})
+                return false
+            },
+            onMoveShouldSetPanResponder: () => {
+                if(this.state.timeStartTouch !== null && Date.now() - this.state.timeStartTouch > 200 && this.state.left == -200) {
+                    this.setState({left: 0, dx: 0, timeStartTouch: null})
+                } 
+                return false
+            }
+        })
     }
     render() {
         const {item, colors, onEditResult, onDeleteResult} = this.props;
-        switch(item.gameType.id) {
-            case 1:
-            case 2:
-                return (
-                    <View style={styles.container(item.gameType.id, colors)}>
-                        <TextHead colors={colors} text={item.gameType.name+" "+item.where[1]}  />
-                        <TextHead colors={colors} text={item.leagueData.enemyTeam[1]} />
-                        <League_TeamResultsAndDate colors={colors} item={item} />
-                        <League_ResultOfDuel colors={colors} result={item.leagueData.player.teamPoints} />
-                        <League_PlayerResults colors={colors} item={item} />
-                        <TextComment colors={colors} text={item.comment}/>
-                        <Button onPress={onEditResult} title="Edytuj" />
-                        <Button onPress={onDeleteResult} title="Usuń" />
-                    </View>
-                )
-            case 3:
-            case 4:
-                return (
-                    <View style={styles.container(item.gameType.id, colors)}>
-                        <TextHead colors={colors} text={item.gameType.name+" "+item.where[1]}  />
-                        <BasicGame_NumberOfThrowsAndDate colors={colors} item={item} />
-                        <BasicGame_PlayerResults colors={colors} item={item} />
-                        <TextComment colors={colors} text={item.comment}/>
-                        <Button onPress={onEditResult} title="Edytuj" />
-                        <Button onPress={onDeleteResult} title="Usuń" />
-                    </View>
-                )
+        let code = []
+        if(item.gameType.isLeague) {
+            code = <>
+                <TextHead colors={colors} text={item.leagueData.enemyTeam[1]} />
+                <League_TeamResultsAndDate colors={colors} item={item} />
+                <League_ResultOfDuel colors={colors} result={item.leagueData.player.teamPoints} />
+                <League_PlayerResults colors={colors} item={item} />
+            </>
         }
+        else {
+            code = <>
+                <BasicGame_NumberOfThrowsAndDate colors={colors} item={item} />
+                <BasicGame_PlayerResults colors={colors} item={item} />
+            </>
+        }
+        return (
+            <View style={[{flexDirection: 'row', left: this.state.left}]} {...this.panResponderMain.panHandlers}>
+                <Animated.View style={styles.container(item.gameType.id, colors, this.state.left)} 
+                    {...this.panResponderClose.panHandlers}
+                >
+                    <TextHead colors={colors} text={item.gameType.name+" "+item.where[1]}  />
+                    {code}
+                    <TextComment colors={colors} text={item.comment}/>
+                </Animated.View>
+                <AdditionalOption 
+                    width={-this.state.left} showText={this.state.left < -160}
+                    showIcon={this.state.left < -50} onEdit={onEditResult} onDelete={onDeleteResult}
+                />
+            </View>
+            
+        )
+    }
+    onEndTouch = () => {
+        if(this.state.left < -150) this.setState({left: -200, dx: 0})
+        else this.setState({left: 0, dx: 0})
     }
 }
 
@@ -80,9 +132,7 @@ const League_PlayerResults = ({colors, item}) => {
             style =  (i == 0) ? styles.playerResults.summary(colors) : styles.playerResults.lane(colors);
             listText = [pelne[i], zbierane[i], dziury[i], setPoints[i], suma[i]];
         }
-        code.push (
-            <PlayerResults_Row key={i} listText={listText} listWidth={listWidthColumn} style={style} />
-        )
+        code.push(<PlayerResults_Row key={i} listText={listText} listWidth={listWidthColumn} style={style} />)
     }
     return code;
 }
@@ -90,11 +140,7 @@ const League_PlayerResults = ({colors, item}) => {
 const PlayerResults_Row = ({listText, listWidth, style}) => {
     var code = [];
     for(var i=0; i<listText.length; i++) {
-        code.push(
-            <Text key={i} style={[style, styles.playerResults.column(listWidth[i])]}>
-                {listText[i]}
-            </Text>
-        )
+        code.push(<Text key={i} style={[style, styles.playerResults.column(listWidth[i])]}>{listText[i]}</Text>)
     }
     return <View style={styles.viewRow}>{code}</View>
 }
@@ -127,15 +173,12 @@ const BasicGame_PlayerResults = ({colors, item}) => {
             style =  (i == 0) ? styles.playerResults.summary(colors) : styles.playerResults.lane(colors);
             listText = [pelne[i], zbierane[i], dziury[i], suma[i]];
         }
-        code.push (
-            <PlayerResults_Row key={i} listText={listText} listWidth={listWidthColumn} style={style} />
-        )
+        code.push (<PlayerResults_Row key={i} listText={listText} listWidth={listWidthColumn} style={style}/>)
     }
     return code;
 }
 
 const getListTextSetPoints = (setPoints) => {
-    //Funkcja wyrównuje długość ciągów znaków z punktami setowymi drużyn
     var textSetPoints = ["("+setPoints[0]+")", "("+setPoints[1]+")"];
     if(textSetPoints[0].length < textSetPoints[1].length) textSetPoints[0] = " " + textSetPoints[0];
     else if(textSetPoints[0].length > textSetPoints[1].length) textSetPoints[1] += " ";
@@ -151,4 +194,4 @@ const mapStateToProps = state => ({
     colors: state.theme.colors
 })
 
-export default connect(mapStateToProps, undefined)(Results_ResultItem);
+export default connect(mapStateToProps, undefined)(ResultItem);

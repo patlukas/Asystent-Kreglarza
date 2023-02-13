@@ -5,8 +5,8 @@ import { onDeleteResult } from '../../../actions';
 import AlertTwoOption from '../../Alerty/AlertTwoOption';
 import Edit_Window from '../../Edit_Window';
 import MenuBar from '../../MenuBar';
+import ResultItem from '../ResultItem/ResultItem';
 import Results_ButtonAddNewResult from '../Results_ButtonAddNewResult';
-import Results_ResultItem from '../Results_ResultItem';
 
 class Results_Window extends Component {
     constructor(props) {
@@ -34,7 +34,7 @@ class Results_Window extends Component {
                 key={0}
                 data={listOfResults} 
                 renderItem={({item}) => 
-                    <Results_ResultItem 
+                    <ResultItem 
                         item={item} 
                         onDeleteResult={() => this.setState({idDeleteResult: item.id})} 
                         onEditResult={() => this.setState({editedResult: item})}
@@ -45,7 +45,7 @@ class Results_Window extends Component {
         )
         return (
             <>
-                <View style={{height: 50, width: "100%"}} />
+                <Text style={styles.topBar(colors.barTop.backgroundColor, colors.barTop.color)}>Wyniki</Text>
                 <View style={styles.resultsContainer}>
                     {code}
                     <Results_ButtonAddNewResult />
@@ -100,7 +100,16 @@ const styles = StyleSheet.create({
         marginBottom: 42, 
         flex: 1, 
         width: "100%"
-    }
+    },
+    topBar: (backgroundColor, color) => ({
+        color, backgroundColor,
+        height: 50,
+        width: "100%",
+        textAlign: "center",
+        textAlignVertical: "center",
+        fontSize: 25,
+        fontWeight: "bold"
+    })
 })
 
 const mapStateToProps = state => ({

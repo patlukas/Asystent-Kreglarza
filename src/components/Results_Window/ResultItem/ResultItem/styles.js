@@ -1,13 +1,16 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-    container: (gameTypeId, colors) => ({
+    container: (gameTypeId, colors, left=0) => ({
         backgroundColor: colors.gameType[gameTypeId],
         paddingTop: 7,
         paddingBottom: 7,
         borderColor: colors.listResultsBorder,
         borderBottomWidth: 3,
-        borderTopWidth: 3
+        borderTopWidth: 3,
+        width: "100%"
+        // marginLeft: left,
+        // marginRight: -left
     }),
     headText: (colors)=> ({
         color: colors.font.basic,

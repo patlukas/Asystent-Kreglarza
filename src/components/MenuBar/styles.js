@@ -9,7 +9,8 @@ export const styles = StyleSheet.create({
         backgroundColor: colors.menuBar_bg
     }),
     btnView: {
-        width: '33.33%',
+        // width: '33.33%',
+        width: '50%',
     },
     btnTouchableArea: {
         width: '100%',

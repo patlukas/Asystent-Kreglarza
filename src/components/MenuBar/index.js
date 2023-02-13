@@ -39,17 +39,18 @@ const BarOfMenuBtn = ({selectedWindow, onSelectWindow, colors}) => {
     let code = [];
     const path = [
         require('../../assets/images/home.png'),
-        require('../../assets/images/stat.png'),
+        // require('../../assets/images/stat.png'),
         require('../../assets/images/settings.png'),
     ];
-    for (let i = 1; i <= path.length; i++) {
-        var isSelected = (i == selectedWindow);
+    const listId = [1, 3]
+    for (let i = 0; i < path.length; i++) {
+        var isSelected = (listId[i] == selectedWindow);
         code.push(
             <MenuBtn
-                key={i}
-                idBtn={i}
+                key={listId[i]}
+                idBtn={listId[i]}
                 onSelectWindow={onSelectWindow}
-                imageSource={path[i - 1]}
+                imageSource={path[i]}
                 isSelected={isSelected}
                 colors={colors}
             />,

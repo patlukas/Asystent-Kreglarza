@@ -21,6 +21,14 @@ const common = {
         4: EMERALD
     },
     listResultsBorder: GRAY,
+    resultItem: {
+        editBg: "#1464a0",
+        deleteBg: "#0f4b78",
+        editFocusBg: "#060",
+        deleteFocusBg: "#600",
+        editColor: "#fff",
+        deleteColor: "#fff"
+    },
     font: {
         basic: MIDNIGHT_BLUE,
         notImportant: GRAY,
