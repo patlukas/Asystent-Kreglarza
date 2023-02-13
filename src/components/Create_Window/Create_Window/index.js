@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from "react-redux";
+import { BackHandler } from 'react-native';
 import { onSelectWindow, onEditCreateResult, onCreateNewResult } from '../../../actions';
 import AlertOneOption from '../../Alerty/AlertOneOption';
 import BarTopTwoBtn from '../../BarTopTwoBtn';
@@ -50,7 +51,18 @@ class Create_Window extends Component {
             comment: "",
             season: ""
         };
+        this.onBack = this.onBack.bind(this)
         this.onCreateResult = this.onCreateResult.bind(this)
+    }
+    componentDidMount() {
+        BackHandler.addEventListener("hardwareBackPress", this.onBack)
+    }
+    componentWillUnmount() {
+        BackHandler.removeEventListener("hardwareBackPress", this.onBack)
+    }
+    onBack() {
+        this.props.onSelectWindow(1)
+        return true
     }
     render() {
         const {onSelectWindow, createResult, onEditCreateResult} = this.props;

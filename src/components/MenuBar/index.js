@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, TouchableOpacity, Image} from 'react-native';
+import {View, TouchableOpacity, Image, Keyboard} from 'react-native';
 import { connect } from "react-redux";
 import { onSelectWindow } from '../../actions';
 import { styles } from "./styles";
@@ -7,9 +7,23 @@ import { styles } from "./styles";
 class MenuBar extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            show: true
+        }
     }
+    componentDidMount() {
+        this.keyboardDidShowListener = Keyboard.addListener("keyboardDidShow", this.onShowKeyboard)
+        this.keyboardDidHideListener = Keyboard.addListener("keyboardDidHide", this.onHideKeyboard)
+    }
+    componentWillUnmount() {
+        this.keyboardDidShowListener.remove()
+        this.keyboardDidHideListener.remove()
+    }
+    onShowKeyboard = () => this.setState({show: false})
+    onHideKeyboard = () => this.setState({show: true})
     render() {
         const {selectedWindow, onSelectWindow, colors} = this.props;
+        if(!this.state.show) return null
         return (
             <View style={styles.containerMain(colors)}>
                 <BarOfMenuBtn 

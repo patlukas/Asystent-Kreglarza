@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, ScrollView} from 'react-native';
+import {View, Text, StyleSheet, ScrollView, BackHandler} from 'react-native';
 import { connect } from "react-redux";
+import {onSelectWindow} from '../../../actions';
 import MenuBar from '../../MenuBar';
 import HomePlaceDropdown from '../HomePlaceDropdown';
 import ThemeDropdown from '../ThemeDropdown';
@@ -10,6 +11,17 @@ import Version from '../Version';
 class Settings_Window extends Component {
     constructor(props) {
         super(props);
+        this.onBack = this.onBack.bind(this)
+    }
+    componentDidMount() {
+        BackHandler.addEventListener("hardwareBackPress", this.onBack)
+    }
+    componentWillUnmount() {
+        BackHandler.removeEventListener("hardwareBackPress", this.onBack)
+    }
+    onBack() {
+        this.props.onSelectWindow(1)
+        return true
     }
     render() {
         const {colors} = this.props
@@ -62,4 +74,8 @@ const mapStateToProps = state => ({
     colors: state.theme.colors
 })
 
-export default connect(mapStateToProps, undefined)(Settings_Window);
+const mapDispatchToProps = dispatch => ({
+    onSelectWindow: (windowId) => dispatch(onSelectWindow(windowId)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Settings_Window);

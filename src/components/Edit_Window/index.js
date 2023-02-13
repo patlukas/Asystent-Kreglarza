@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import { connect } from "react-redux";
-import { onSaveEditResult } from '../../actions';
+import {BackHandler} from 'react-native';
+import {connect} from "react-redux";
+import {onSaveEditResult} from '../../actions';
 import AlertOneOption from '../Alerty/AlertOneOption';
 import AlertTwoOption from '../Alerty/AlertTwoOption';
 import BarTopTwoBtn from '../BarTopTwoBtn';
@@ -19,6 +20,12 @@ class Edit_Window extends Component {
         this.beforeOnSave = this.beforeOnSave.bind(this)
         this.onSave = this.onSave.bind(this)
         this.onCancel = this.onCancel.bind(this)
+    }
+    componentDidMount() {
+        BackHandler.addEventListener("hardwareBackPress", this.onCancel)
+    }
+    componentWillUnmount() {
+        BackHandler.removeEventListener("hardwareBackPress", this.onCancel)
     }
     render() {
         const {editedResult, onEndEdit} = this.props;
@@ -81,6 +88,7 @@ class Edit_Window extends Component {
         prepareResultsToSave(preparedResult)
         if(compareTwoResults(preparedResult, editedResult)) onEndEdit()
         else this.setState({showAlertCancel: true})
+        return true
     }
 }
 
