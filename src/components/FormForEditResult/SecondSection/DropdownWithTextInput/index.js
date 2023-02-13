@@ -47,7 +47,7 @@ class DropdownWithTextInput extends Component {
                     <View style={styles.containerTextInput}>
                         <OutlinedTextField
                             value={selected[1]}
-                            onEndEditing={(event) => onChange([-1, event.nativeEvent.text])}                
+                            onChangeText={(text) => onChange([-1, text])}             
                             label={labelTextInput}
                             textColor={colors.form.input}
                             tintColor={colors.form.main}

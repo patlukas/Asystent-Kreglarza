@@ -21,7 +21,7 @@ class CommentInput extends Component {
                 <OutlinedTextField
                     ref={this.ref}
                     value={rememberedComment}
-                    onEndEditing={(event) => onChange(event.nativeEvent.text)}                
+                    onChangeText={onChange}           
                     label='Komentarz (opcjonalny)'
                     characterRestriction={100}
                     maxLength={100}

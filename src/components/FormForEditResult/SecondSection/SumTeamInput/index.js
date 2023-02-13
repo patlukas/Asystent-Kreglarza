@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, TextInput} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import { OutlinedTextField } from 'react-native-material-textfield';
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
@@ -35,7 +35,7 @@ class SumTeamInput extends Component {
                     ref={this.ref}
                     keyboardType='numeric'
                     value={value}
-                    onEndEditing={(event) => this.beforeChange(event.nativeEvent.text)}                
+                    onChangeText={this.beforeChange}       
                     label='Suma drużyny'
                     maxLength={5}
                     formatText={this.formatText}
