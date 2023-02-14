@@ -103,7 +103,7 @@ export const onPrepareResultObject = (resultObject, key, value, listWhere, listE
                 resultObject.results.zbierane.push(null)
                 resultObject.results.dziury.push(0)
             }
-            if(value.numberOfLanes > 0) {
+            if(value.numberOfLanesInForm > 0) {
                 resultObject.results.pelne[0] = getSumLanesResults(resultObject.results.pelne, value.numberOfLanes)
                 resultObject.results.zbierane[0] = getSumLanesResults(resultObject.results.zbierane, value.numberOfLanes)
                 resultObject.results.dziury[0] = getSumLanesResults(resultObject.results.dziury, value.numberOfLanes)

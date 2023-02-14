@@ -7,12 +7,16 @@ import {Dropdown} from 'react-native-material-dropdown';
 const HowManyLanesDropdown = ({label, options, selected, onChange, colors}) => {
     let data = []
     let selected_checked = null
+    let fullWidth = true
     for(let option of options) {
-        if(selected === option.key) selected_checked = selected
+        if(selected === option.key) {
+            selected_checked = selected
+            if(option.canWinDuel) fullWidth = false
+        }
         data.push({label: option.label, value: option.key, fullValue: option})
     }
     return (
-        <View style={styles.container}>
+        <View style={styles.container(fullWidth)}>
             <Dropdown
                 label={label}
                 data={data}
@@ -30,10 +34,10 @@ const HowManyLanesDropdown = ({label, options, selected, onChange, colors}) => {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        width: "47%",
+    container: (fullWidth) => ({
+        width: fullWidth ? "96%" : "47%",
         marginLeft: "2%"
-    }
+    })
 })
 
 HowManyLanesDropdown.propTypes = {

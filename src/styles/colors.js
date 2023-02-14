@@ -94,7 +94,7 @@ const Ciemny = {
         second: "#757457",
         input: "#757457",
         dataPicker: "#757457",
-        dropdownItemTextSelected: "#232323",
+        dropdownItemTextSelected: "#393939",
         dropdownItemTextNoSelected: "#757457",
         dropdownPickerBackground: "#121212",
         clearBtn: {
@@ -119,8 +119,8 @@ const Ciemny = {
         deleteBg: "#192a51",
         editFocusBg: "#274221",
         deleteFocusBg: "#50141B",
-        editColor: "#454545",
-        deleteColor: "#454545",
+        editColor: "#757457",
+        deleteColor: "#757457",
         borderColor: "#454545",
         listGameType: {
             1: "#50141B",

@@ -161,11 +161,18 @@ const save = async (value) => {
     } catch (e) {console.log(e)}
 }
 
+const sortList = (a, b) => {
+    if(a.date != b.date) return b.date - a.date
+    return b.id-a.id
+}
+
 const resultsList = function (state = initialState, action) {
     switch (action.type) {
         case "SET_LIST_RESULTS":
             // return []
-            return action.payload.listOfResults
+            let listOfResults = action.payload.listOfResults
+            listOfResults.sort(sortList)
+            return listOfResults
         case "DELETE_RESULT":
             const {idDeleteResult} = action.payload
             var newState = [...state]
@@ -187,6 +194,7 @@ const resultsList = function (state = initialState, action) {
                 }
             }
             save(newState)
+            newState.sort(sortList)
             return newState
         case "CREATE_NEW_RESULT":
             var newState = [...state]
@@ -196,6 +204,7 @@ const resultsList = function (state = initialState, action) {
             newResult.id = newId
             newState.push(newResult)
             save(newState)
+            newState.sort(sortList)
             return newState
         default:
             return state;
