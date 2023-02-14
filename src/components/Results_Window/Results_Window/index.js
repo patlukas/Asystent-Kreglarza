@@ -28,7 +28,7 @@ class Results_Window extends Component {
                 />
             )
         }
-        if(listOfResults.length == 0) code.push(<WelcomeWindow key={0} color={colors.TEXT} colorSecond={colors.TEXT_SECONDARY}/>)
+        if(listOfResults.length == 0) code.push(<WelcomeWindow key={0} color={colors.form.main} colorSecond={colors.form.second}/>)
         else code.push(
             <FlatList 
                 key={0}
@@ -45,7 +45,7 @@ class Results_Window extends Component {
         )
         return (
             <>
-                <Text style={styles.topBar(colors.barTop.backgroundColor, colors.barTop.color)}>Wyniki</Text>
+                <Text style={styles.topBar(colors.barTop.backgroundColor, colors.barTop.color, colors.barTop.borderColor)}>Wyniki</Text>
                 <View style={styles.resultsContainer}>
                     {code}
                     <Results_ButtonAddNewResult />
@@ -69,20 +69,24 @@ class Results_Window extends Component {
 
 const WelcomeWindow = ({color, colorSecond}) => {
     return (
-        <>
+        <View style={styles.containerWelcome}>
             <Text style={styles.textWelcome(color)}>Witaj w aplikacji</Text>
-            <Text style={styles.textWelcomeBold(color)}>ASYSTENT KRĘGLARZA</Text>
+            <Text style={styles.textWelcomeBold(color)}>„ASYSTENT KRĘGLARZA”</Text>
             <Text style={styles.textTip(colorSecond)}>
-                Aby dodać pierwszy wynik kliknij przycisk ze znakiem "+" znajdujący się w prawym dolnym rogu
+                Aby dodać pierwszy wynik, kliknij przycisk ze znakiem „+” znajdujący się w prawym dolnym rogu
             </Text>
-        </>
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
+    containerWelcome: {
+        justifyContent: "center", 
+        height: "100%"
+    },
     textWelcome: (color) => ({
         color,
-        fontSize: 20, 
+        fontSize: 25, 
         textAlign: "center"
     }),
     textWelcomeBold: (color) => ({
@@ -101,14 +105,15 @@ const styles = StyleSheet.create({
         flex: 1, 
         width: "100%"
     },
-    topBar: (backgroundColor, color) => ({
-        color, backgroundColor,
-        height: 50,
+    topBar: (backgroundColor, color, borderColor) => ({
+        color, backgroundColor, borderColor,
+        height: 39,
         width: "100%",
         textAlign: "center",
         textAlignVertical: "center",
         fontSize: 25,
-        fontWeight: "bold"
+        fontWeight: "bold",
+        borderBottomWidth: 1
     })
 })
 

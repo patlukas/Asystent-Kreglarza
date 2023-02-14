@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 const AdditionalOption = ({width, showText, showIcon, onEdit, onDelete, colors}) => {
     const {editBg, editFocusBg, editColor, deleteBg, deleteFocusBg, deleteColor} = colors.resultItem
     return (
-        <View style={styles.mainContainer(width, colors.listResultsBorder)}>
+        <View style={styles.mainContainer(width, colors.resultItem.borderColor)}>
             <View style={styles.containerOption(editFocusBg)}>
                 <TouchableOpacity style={styles.touchableOption(editBg)} onPress={onEdit}>
                     <Image 

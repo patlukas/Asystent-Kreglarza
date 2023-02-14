@@ -164,6 +164,7 @@ const save = async (value) => {
 const resultsList = function (state = initialState, action) {
     switch (action.type) {
         case "SET_LIST_RESULTS":
+            // return []
             return action.payload.listOfResults
         case "DELETE_RESULT":
             const {idDeleteResult} = action.payload

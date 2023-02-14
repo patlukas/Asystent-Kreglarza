@@ -22,7 +22,7 @@ class FormForEditResult extends Component {
         const {colors, title, nameClearButton, editedResult} = this.props;
         return (
             <>
-                <ScrollView style={{backgroundColor: colors.BACKGROUND}}>
+                <ScrollView style={{backgroundColor: colors.backgroundColor}}>
                     <Text style={styles.title(colors)}>{title}</Text>
                     <FirstSection 
                         title="Nowy Wynik"
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         paddingBottom: 15,
         fontWeight: '700',
-        color: colors.formForCreateResult.fontHead
+        color: colors.form.main
     })
 })
 

@@ -1,11 +1,12 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-    container: (backgroundColor) => ({
+    container: (backgroundColor, borderColor) => ({
+        backgroundColor, borderColor,
+        borderBottomWidth: 1,
         position: 'relative',
         width: '100%',
-        height: 39,
-        backgroundColor: backgroundColor
+        height: 39
     }),
     btnLeft: {
         position: 'absolute',

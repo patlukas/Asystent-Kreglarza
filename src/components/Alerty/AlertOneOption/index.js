@@ -6,7 +6,7 @@ import { styles } from "./styles";
 
 const AlertOneOption = (props) => {
     const {visible, onPress, title, optionName, subtitle, colors} = props;
-    const {backgroundColor, borderColor, subtitleColor, titleColor, optionBackgroundColor, optionColor} = colors.alert
+    const {backgroundColor, borderColor, subtitleColor, titleColor, optionBgColor, optionColor} = colors.alert
     return (
         <Modal transparent={true} visible={visible} onRequestClose={onPress} animationType="fade">
             <TouchableOpacity onPress={onPress} style={styles.touchableOpacityContainer}/>
@@ -14,7 +14,7 @@ const AlertOneOption = (props) => {
                 <View style={styles.viewContainer(backgroundColor, borderColor)}>
                     <Text style={styles.textTitle(titleColor)}>{title}</Text>
                     <Text style={styles.textSubtitle(subtitleColor, (subtitle == '' ? 'none' : 'flex'))}>{subtitle}</Text>
-                    <TouchableOpacity style={styles.buttonTouchableOpacity(optionBackgroundColor)} onPress={onPress}>
+                    <TouchableOpacity style={styles.buttonTouchableOpacity(optionBgColor)} onPress={onPress}>
                         <Text style={styles.buttonText(optionColor)}>{optionName}</Text>
                     </TouchableOpacity>
                 </View>

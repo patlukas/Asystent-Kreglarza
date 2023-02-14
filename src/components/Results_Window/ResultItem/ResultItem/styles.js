@@ -1,19 +1,17 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-    container: (gameTypeId, colors, left=0) => ({
-        backgroundColor: colors.gameType[gameTypeId],
+    container: (gameTypeId, colors) => ({
+        backgroundColor: colors.resultItem.listGameType[gameTypeId],
         paddingTop: 7,
         paddingBottom: 7,
-        borderColor: colors.listResultsBorder,
+        borderColor: colors.resultItem.borderColor,
         borderBottomWidth: 3,
         borderTopWidth: 3,
         width: "100%"
-        // marginLeft: left,
-        // marginRight: -left
     }),
     headText: (colors)=> ({
-        color: colors.font.basic,
+        color: colors.resultItem.fontMain,
         width: "100%",
         textAlign: "center",
         fontWeight: "bold",
@@ -27,10 +25,10 @@ export const styles = StyleSheet.create({
     league: {
         setPoints: (colors) => ({
             fontSize: 10,
-            color: colors.font.notImportant,
+            color: colors.resultItem.fontSecond,
         }),
         teamPoints: (colors) => ({
-            color: colors.font.basic,
+            color: colors.resultItem.fontMain,
             fontWeight: "bold",
             fontSize: 16
         }),
@@ -42,14 +40,14 @@ export const styles = StyleSheet.create({
         },
         resultOfDuel: (colors) => ({
             textAlign: "center",
-            color: colors.font.basic,
+            color: colors.resultItem.fontMain,
             fontWeight: "bold",
             fontSize: 18,
             marginTop: 4
         }),
     },
     cellMainInfo: (colors, width) => ({
-        color: colors.font.basic,
+        color: colors.resultItem.fontMain,
         width: width,
         textAlign: "center",
         fontSize: 16
@@ -57,18 +55,18 @@ export const styles = StyleSheet.create({
     playerResults: {
         head: (colors) => ({
             fontWeight: "bold",
-            color: colors.font.basic,
+            color: colors.resultItem.fontMain,
             fontSize: 17,
             marginTop: 5
         }),
         summary: (colors) => ({
             fontWeight: "bold",
-            color: colors.font.basic,
+            color: colors.resultItem.fontMain,
             fontSize: 18,
             lineHeight: 18,
         }),
         lane: (colors) => ({
-            color: colors.font.basic,
+            color: colors.resultItem.fontMain,
             fontSize: 16,
             lineHeight: 16
         }),
@@ -78,7 +76,7 @@ export const styles = StyleSheet.create({
         }),
     },
     comment: (colors) => ({
-        color: colors.font.basic,
+        color: colors.resultItem.fontMain,
         textAlign: "center",
         fontSize: 12,
         marginLeft: "4%",

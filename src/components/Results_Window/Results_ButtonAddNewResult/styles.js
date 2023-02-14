@@ -9,11 +9,11 @@ export const styles = StyleSheet.create({
       bottom: 11,
       right: 11,
       borderRadius: 90,
-      backgroundColor: colors.resultsBtnAddNewResult.backgroundColor
+      backgroundColor: colors.result.btnAddNewResult.backgroundColor
     }),
     plusSign: (colors) => ({
       textAlign: 'center',
-      color: colors.resultsBtnAddNewResult.color,
+      color: colors.result.btnAddNewResult.color,
       lineHeight: 60,
       fontSize: 45
     })

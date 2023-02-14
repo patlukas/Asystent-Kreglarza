@@ -71,7 +71,7 @@ class ResultItem extends Component {
         }
         return (
             <View style={[{flexDirection: 'row', left: this.state.left}]} {...this.panResponderMain.panHandlers}>
-                <Animated.View style={styles.container(item.gameType.id, colors, this.state.left)} 
+                <Animated.View style={styles.container(item.gameType.id, colors)} 
                     {...this.panResponderClose.panHandlers}
                 >
                     <TextHead colors={colors} text={item.gameType.name+" "+item.where[1]}  />

@@ -10,9 +10,9 @@ class BarTopTwoBtn extends Component {
     }
     render() {
         const {leftBtnTitle, leftBtnOnPress, rightBtnTitle, rightBtnOnPress} = this.props;
-        const {backgroundColor, color} = this.props.colors.barTop;
+        const {backgroundColor, color, borderColor} = this.props.colors.barTop;
         return (
-            <View style={styles.container(backgroundColor)} >
+            <View style={styles.container(backgroundColor, borderColor)} >
                 <BarTopBtn onPress={leftBtnOnPress} text={leftBtnTitle} color={color} style={styles.btnLeft}/>
                 <BarTopBtn onPress={rightBtnOnPress} text={rightBtnTitle} color={color} style={styles.btnRight} />
             </View>

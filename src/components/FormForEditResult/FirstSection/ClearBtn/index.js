@@ -13,15 +13,19 @@ const ClearBtn = ({colors, name, onPress}) => {
 
 const styles = StyleSheet.create({
     button: (colors) => ({
-        width: 200,
         padding: 10,
+        paddingLeft: 25,
+        paddingRight: 25,
         alignItems: "center",
         marginRight: 'auto',
         marginLeft: 'auto',
-        backgroundColor: colors.formForCreateResult.clearBtnBg
+        borderRadius: 10,
+        backgroundColor: colors.form.clearBtn.backgroundColor
     }),
     buttonText: (colors) => ({
-        color: colors.formForCreateResult.clearBtnColor
+        color: colors.form.clearBtn.color,
+        fontWeight: "bold",
+        fontSize: 15
     })
 })
 

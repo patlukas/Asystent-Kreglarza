@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
         height: 42,
         bottom: 0,
         position: 'absolute',
-        backgroundColor: colors.menuBar_bg
+        backgroundColor: colors.menuBar.backgroundColor
     }),
     btnView: {
         // width: '33.33%',
@@ -33,9 +33,9 @@ export const styles = StyleSheet.create({
         marginRight: 'auto',
         width: 50,
         height: isSelected ? 1 : 0,
-        backgroundColor: colors.menuBar_btnChecked
+        backgroundColor: colors.menuBar.btnChecked 
     }),
     btnImageColor: (colors, isSelected) => (
-        isSelected ? colors.menuBar_btnChecked : colors.menuBar_btnNoChecked
+        isSelected ? colors.menuBar.btnChecked : colors.menuBar.btnNoChecked
     )
 })
