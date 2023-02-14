@@ -9,7 +9,7 @@ const TrainingPlaceDropdown = ({listWhere, trainingPlace, onSetTrainingPlace}) =
         <DropdownWithTextInput 
             label={label}
             labelOfOtherOption="Inne miejsce" 
-            labelTextInput='Domyślne miejsce treningowe'
+            labelTextInput='Miejsce treningowe'
             selected={trainingPlace} 
             onChange={onSetTrainingPlace} 
             listOptions={listWhere}

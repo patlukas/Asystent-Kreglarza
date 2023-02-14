@@ -30,7 +30,7 @@ class DropdownWithTextInput extends Component {
                                 textColor={colors.form.dropdownItemTextNoSelected}
                                 pickerStyle={{backgroundColor: colors.form.dropdownPickerBackground}}
                                 value={selected[0]}
-                                itemCount={5.35}
+                                itemCount={8.35}
                                 onChangeText={(_, index) => onChange(data[index].fullValue)}
                                 fontSize={14}
                             />
