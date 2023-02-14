@@ -6,6 +6,7 @@ import MenuBar from '../../MenuBar';
 import HomePlaceDropdown from '../HomePlaceDropdown';
 import ThemeDropdown from '../ThemeDropdown';
 import TrainingPlaceDropdown from '../TrainingPlaceDropdown';
+import UsedMemory from '../UsedMemory';
 import Version from '../Version';
 
 class Settings_Window extends Component {
@@ -36,6 +37,8 @@ class Settings_Window extends Component {
                     <HomePlaceDropdown />
                     <View style={styles.separator(colors.form.main)} />
                     <TrainingPlaceDropdown />
+                    <View style={styles.separator(colors.form.main)} />
+                    <UsedMemory />
                     <View style={styles.separator(colors.form.main)} />
                     <Version />
                 </ScrollView>

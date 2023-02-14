@@ -4,7 +4,7 @@ import { OutlinedTextField } from 'react-native-material-textfield';
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import {Dropdown} from 'react-native-material-dropdown';
-
+//TODO splash screen
 class DropdownWithTextInput extends Component {
     constructor(props) {
         super(props);

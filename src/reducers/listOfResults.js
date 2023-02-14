@@ -157,6 +157,10 @@ const exampleState = [
 ]
 
 const save = async (value) => {
+    if(new Blob([JSON.stringify(value)]).size > 2097002) {
+        alert("Nie udało się zapisać wyniku, \nbo zabrakło pamięci.")
+        return
+    }
     try {await AsyncStorage.setItem('@listOfResults', JSON.stringify(value))
     } catch (e) {console.log(e)}
 }
@@ -169,10 +173,8 @@ const sortList = (a, b) => {
 const resultsList = function (state = initialState, action) {
     switch (action.type) {
         case "SET_LIST_RESULTS":
-            // return []
-            let listOfResults = action.payload.listOfResults
-            listOfResults.sort(sortList)
-            return listOfResults
+            var newState = [...action.payload.listOfResults]
+            return newState
         case "DELETE_RESULT":
             const {idDeleteResult} = action.payload
             var newState = [...state]
