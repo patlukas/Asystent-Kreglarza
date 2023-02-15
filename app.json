@@ -2,8 +2,9 @@
   "expo": {
     "name": "Asystent Kręglarza",
     "slug": "AsystentKreglarza",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "orientation": "portrait",
+    "backgroundColor": "#020202",
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -19,7 +20,13 @@
     "icon": "./src/assets/images/icon.png",
     "android": {
       "package": "com.asystentkreglarza",
-      "versionCode": 5
+      "versionCode": 6
+    },
+    "androidNavigationBar": {
+      "backgroundColor": "#020202"
+    },
+    "androidStatusBar": {
+      "backgroundColor": "#020202"
     }
   }
 }
