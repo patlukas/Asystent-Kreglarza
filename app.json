@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "AsystentKreglarza",
+    "name": "Asystent Kręglarza",
     "slug": "AsystentKreglarza",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -14,6 +14,7 @@
     "splash": {
       "image": "./src/assets/images/splashscreen.png",
       "backgroundColor": "#3D426B"
-    }
+    },
+    "icon": "./src/assets/images/icon.png"
   }
 }
