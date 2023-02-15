@@ -8,19 +8,16 @@ import Results_Window from '../Results_Window/Results_Window';
 import Settings_Window from '../Settings_Window/Settings_Window';
 import Create_Window from '../Create_Window/Create_Window';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as SplashScreen from 'expo-splash-screen';
 
 
 class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            showSplashScreen: true
-        }
         this.loadDataFromLocalStorage()
     }
     render () {
         const {selectedWindow, colors, onChangeTheme} = this.props;
-        if(this.state.showSplashScreen) return <Text>Splash screen</Text>
         switch(selectedWindow) {
             case 1: 
                 return <Animated.View style={styles.container(colors)}><Results_Window/></Animated.View>
@@ -48,7 +45,7 @@ class App extends React.Component {
             if(listOfResults !== null) this.props.onSetListOfResults(JSON.parse(listOfResults))
             if(createResult !== null) this.props.onSetCreateResult(JSON.parse(createResult))
             if(settings !== null) this.props.onLoadSettings(JSON.parse(settings))
-            this.setState({showSplashScreen: false})
+            setTimeout(SplashScreen.hideAsync, 500)
         } catch(e) {console.log(e)}
     }
 }
