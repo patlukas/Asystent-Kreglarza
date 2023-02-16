@@ -1,0 +1,32 @@
+{
+  "expo": {
+    "name": "Asystent Kręglarza",
+    "slug": "AsystentKreglarza",
+    "version": "1.0.6",
+    "orientation": "portrait",
+    "backgroundColor": "#020202",
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "5c8b0836-d5ca-4767-9ace-0f55e69ced27"
+      }
+    },
+    "splash": {
+      "image": "./src/assets/images/splashscreen.png",
+      "backgroundColor": "#3D426B"
+    },
+    "icon": "./src/assets/images/icon.png",
+    "android": {
+      "package": "com.asystentkreglarza",
+      "versionCode": 7
+    },
+    "androidNavigationBar": {
+      "backgroundColor": "#020202"
+    },
+    "androidStatusBar": {
+      "backgroundColor": "#020202"
+    }
+  }
+}
