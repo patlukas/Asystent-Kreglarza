@@ -5,21 +5,40 @@ import { connect } from "react-redux";
 const TrainingPlaceDropdown = ({listOfResults, colors}) => {
     const memoryUsed = new Blob([JSON.stringify(listOfResults)]).size - 2
     const limit = 2097000
-    let percent = parseFloat(((memoryUsed / limit) * 100).toFixed(3)) + "%"
+    const percent = parseFloat(((memoryUsed / limit) * 100).toFixed(3)) + "%"
     const {main, second, dropdownItemTextSelected} = colors.form
-    let resultUnit = "wyników"
-    if(listOfResults.length == 1) resultUnit = "wynik"
-    else if(listOfResults.length >= 2 && listOfResults.length <= 4) resultUnit = "wyniki"
     return (
         <>
             <Text style={styles.titleText(main,14)}>Wykorzystana pamięć do przechowywania wyników</Text>
-            <Text style={styles.titleText(second, 12)}>Aktualnie przechowujesz {listOfResults.length} {resultUnit}</Text>
+            <Text style={styles.titleText(second, 12)}>
+                Aktualnie przechowujesz {listOfResults.length} {getResultUnit(listOfResults.length)}
+            </Text>
             <View style={styles.progressBarContainer(dropdownItemTextSelected)}>
                 <View style={styles.progressBar(dropdownItemTextSelected, percent)}></View>
-                <Text style={styles.percentText(main)}>{percent} ({memoryUsed}B z {limit}B)</Text>
+                <Text style={styles.percentText(main)}>
+                    {percent} ( {getDottedNumber(memoryUsed)}B  z  {getDottedNumber(limit)}B )
+                </Text>
             </View> 
         </>
     );
+}
+
+const getResultUnit = (numberOfResults) => {
+    if(numberOfResults == 1) return "wynik"
+    if(numberOfResults >= 2 && numberOfResults <= 4) return "wyniki"
+    return "wyników"
+}
+
+const getDottedNumber = (number) => {
+    let dottedNumber = ""
+    while(true) {
+        let division = String(number % 1000)
+        while(division.length < 3 && number >= 1000) division = "0" + division
+        number = parseInt(number / 1000)
+        dottedNumber = division + dottedNumber
+        if(number != 0) dottedNumber = "." + dottedNumber
+        else return dottedNumber
+    }
 }
 
 const styles = StyleSheet.create({
