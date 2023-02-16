@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Animated, Text, View, PanResponder} from 'react-native';
-import { connect } from "react-redux";
+import {connect} from "react-redux";
 import AdditionalOption from '../AdditionalOption';
 import {styles} from "./styles";
 
@@ -20,6 +20,7 @@ class ResultItem extends Component {
             onMoveShouldSetPanResponder: (_, gestureState) => {
                 if(gestureState.dx > 8 || gestureState.dx < -8) return true
                 if(this.state.timeStartTouch !== null && Date.now() - this.state.timeStartTouch > 500 && this.state.left == 0) {
+                    this.props.onShowAdditionalOptions()
                     this.setState({left: -161, dx: 0, timeStartTouch: null})
                     return true
                 } 
@@ -34,6 +35,7 @@ class ResultItem extends Component {
                 let left = this.state.left + move
                 if(left < -200) left = -200
                 else if(left > 0) left = 0
+                if(this.state.left == 0) this.props.onShowAdditionalOptions()
                 this.setState({left, dx})
             },
             onPanResponderRelease: this.onEndTouch,
@@ -51,6 +53,11 @@ class ResultItem extends Component {
                 return false
             }
         })
+    }
+    componentDidUpdate(oldProps) {
+        if(oldProps.showAdditionalOptions && !this.props.showAdditionalOptions) {
+            this.setState({left: 0, dx: 0, timeStartTouch: null})
+        }
     }
     render() {
         const {item, colors, onEditResult, onDeleteResult} = this.props;
@@ -83,7 +90,6 @@ class ResultItem extends Component {
                     showIcon={this.state.left < -50} onEdit={onEditResult} onDelete={onDeleteResult}
                 />
             </View>
-            
         )
     }
     onEndTouch = () => {
