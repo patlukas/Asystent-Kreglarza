@@ -1,10 +1,10 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {onSetTheme} from "../../../actions";
+import {onSetTheme, onSelectWindow} from "../../../actions";
 import { connect } from "react-redux";
 import {Dropdown} from 'react-native-material-dropdown';
 
-const ThemeDropdown = ({theme, onSetTheme}) => {
+const ThemeDropdown = ({theme, onSetTheme, onSelectWindow}) => {
     const {selectedTheme, listTheme, colors} = theme
     let data = [];
     let value = null;
@@ -24,11 +24,16 @@ const ThemeDropdown = ({theme, onSetTheme}) => {
                 pickerStyle={{backgroundColor: colors.form.dropdownPickerBackground}}
                 value={value}
                 itemCount={5.35}
-                onChangeText={(selected) => onSetTheme(selected)}
+                onChangeText={(selected) => onSelect(selected, onSetTheme, onSelectWindow)}
                 fontSize={16}
             />
         </View>
     );
+}
+
+const onSelect = (theme, onSetTheme, onSelectWindow) => {
+    onSelectWindow(1)
+    onSetTheme(theme)
 }
 
 const styles = StyleSheet.create({
@@ -43,7 +48,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    onSetTheme: (theme) => dispatch(onSetTheme(theme))
+    onSetTheme: (theme) => dispatch(onSetTheme(theme)),
+    onSelectWindow: (idWindow) => dispatch(onSelectWindow(idWindow))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ThemeDropdown);

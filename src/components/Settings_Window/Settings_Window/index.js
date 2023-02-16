@@ -26,7 +26,7 @@ class Settings_Window extends Component {
     }
     render() {
         const {colors} = this.props
-        const {backgroundColor, color, borderColor} = colors.barTop
+        const {backgroundColor, color} = colors.barTop
         return (
             <>
                 <Text style={styles.topBar(backgroundColor, color)}>Ustawienia</Text>
