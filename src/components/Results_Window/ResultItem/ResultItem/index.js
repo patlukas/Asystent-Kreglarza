@@ -113,6 +113,7 @@ const League_TeamResultsAndDate = ({colors, item}) => {
 }
 
 const League_ResultOfDuel = ({colors, result}) => {
+    if(result == -1) return null
     var textResult = "Pojedynek ";
     if(result == 0) textResult += "przegrany";
     else if(result == 0.5) textResult += "zremisowany";
