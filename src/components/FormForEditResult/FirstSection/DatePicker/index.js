@@ -14,7 +14,6 @@ const DatePicker = ({colors, onChange, selectedDate}) => {
 
     const onCloseDatePicker = (event, newDate) => {
         setShow(false);
-        console.log(event, newDate)
         if(event.type == "set" && (newDate.getTime() != date.getTime() || selectedDate == -1)) {
             date = new Date(newDate)
             var selectedDateString = getDateToString(newDate)

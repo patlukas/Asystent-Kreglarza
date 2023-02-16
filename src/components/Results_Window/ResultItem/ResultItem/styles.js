@@ -62,8 +62,10 @@ export const styles = StyleSheet.create({
         summary: (colors) => ({
             fontWeight: "bold",
             color: colors.resultItem.fontMain,
-            fontSize: 18,
-            lineHeight: 18,
+            fontSize: 20,
+            lineHeight: 20,
+            paddingBottom: 3,
+            paddingTop: 2
         }),
         lane: (colors) => ({
             color: colors.resultItem.fontMain,

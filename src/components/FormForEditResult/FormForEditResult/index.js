@@ -13,28 +13,33 @@ class FormForEditResult extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showAlertClear: false
+            showAlertClear: false,
+            keyChange: 0,
         }
         this.onPrepareResultItemAfterChange = this.onPrepareResultItemAfterChange.bind(this)
         this.onClear = this.onClear.bind(this)
     }
     render() {
         const {colors, title, nameClearButton, editedResult} = this.props;
+        const {keyChange} = this.state
         return (
             <>
                 <ScrollView style={{backgroundColor: colors.backgroundColor}}>
                     <Text style={styles.title(colors)}>{title}</Text>
-                    <FirstSection 
+                    <FirstSection
+                        keyChange={keyChange} 
                         title="Nowy Wynik"
                         nameClearButton={nameClearButton} 
                         onChange={this.onPrepareResultItemAfterChange}
                         resultItem={editedResult}
                     />
                     <SecondSection
+                        keyChange={keyChange} 
                         onChange={this.onPrepareResultItemAfterChange}
                         resultItem={editedResult}
                     />
                     <ThirdSection
+                        keyChange={keyChange} 
                         onChange={this.onPrepareResultItemAfterChange}
                         resultItem={editedResult}
                     />
@@ -54,7 +59,10 @@ class FormForEditResult extends Component {
         const {listWhere, listEnemy, homePlace, trainingPlace, listOfGameTypes, initialEditedResult, editedResult} = this.props
         if(key !== "clear") {
             let resultObject = onPrepareResultObject(editedResult, key, value, listWhere, listEnemy, homePlace, trainingPlace, listOfGameTypes)
-            if(resultObject !== undefined) this.props.onChange(resultObject)
+            if(resultObject !== undefined) {
+                this.setState({keyChange: this.state.keyChange + 1})
+                this.props.onChange(resultObject)
+            }
         }
         else if(!compareTwoResults(editedResult, initialEditedResult)) this.setState({showAlertClear: true})
     }
