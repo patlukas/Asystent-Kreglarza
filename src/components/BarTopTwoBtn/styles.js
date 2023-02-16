@@ -1,9 +1,8 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-    container: (backgroundColor, borderColor) => ({
-        backgroundColor, borderColor,
-        borderBottomWidth: 1,
+    container: (backgroundColor) => ({
+        backgroundColor,
         position: 'relative',
         width: '100%',
         height: 39

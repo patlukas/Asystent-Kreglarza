@@ -29,7 +29,7 @@ class Settings_Window extends Component {
         const {backgroundColor, color, borderColor} = colors.barTop
         return (
             <>
-                <Text style={styles.topBar(backgroundColor, color, borderColor)}>Ustawienia</Text>
+                <Text style={styles.topBar(backgroundColor, color)}>Ustawienia</Text>
                 <ScrollView style={{backgroundColor: colors.backgroundColor, width: "100%"}}>
                     <View style={{height: 20}} />
                     <ThemeDropdown />
@@ -49,9 +49,8 @@ class Settings_Window extends Component {
 }
 
 const styles = StyleSheet.create({
-    topBar: (backgroundColor, color, borderColor) => ({
-        color, backgroundColor, borderColor,
-        borderBottomWidth: 1,
+    topBar: (backgroundColor, color) => ({
+        color, backgroundColor,
         height: 39,
         width: "100%",
         textAlign: "center",

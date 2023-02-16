@@ -12,8 +12,7 @@ const common = {
     backgroundColor: GRAY,
     barTop: {
         backgroundColor: "#000",
-        color: SUN_FLOWER,
-        borderColor: "#454545"
+        color: SUN_FLOWER
     },
     menuBar: {
         btnChecked: SUN_FLOWER,
@@ -24,6 +23,15 @@ const common = {
         btnAddNewResult: {
             backgroundColor: "#000",
             color: "#fff"
+        },
+        sort: {
+            bgColor1: "#050",
+            bgColor2: "#0a0",
+            bgColorSelected: "#f0f",
+            colorSign: "#f00",
+            color: "#fff",
+            bgColor: "#0f0",
+            borderColor: "#00f"
         }
     },
     form: {
@@ -75,8 +83,7 @@ const Ciemny = {
     backgroundColor: "#232323",
     barTop: {
         backgroundColor: "#121212",
-        color: "#7E5541",
-        borderColor: "#454545"
+        color: "#7E5541"
     },
     menuBar: {
         btnChecked: "#7E5541",
@@ -87,6 +94,15 @@ const Ciemny = {
         btnAddNewResult: {
             backgroundColor: "#121212",
             color: "#7E5541"
+        },
+        sort: {
+            bgColor1: "#583b2d",
+            bgColor2: "#4b3327",
+            bgColorSelected: "#1c2f17",
+            colorSign: "#757457",
+            color: "#977666",
+            bgColor: "#121212",
+            borderColor: "#121212"
         }
     },
     form: {
@@ -139,8 +155,7 @@ const Jasny = {
     backgroundColor: "#B7B7A4",
     barTop: {
         backgroundColor: "#5c3e30",
-        color: "#CD997E",
-        borderColor: "#DDBEA9"
+        color: "#CD997E"
     },
     menuBar: {
         btnChecked: "#FFE8D6",
@@ -151,6 +166,15 @@ const Jasny = {
         btnAddNewResult: {
             backgroundColor: "#5c3e30",
             color: "#FFE8D6"
+        },
+        sort: {
+            bgColor1: "#9a6f5c",
+            bgColor2: "#a57f6e",
+            bgColorSelected: "#768273",
+            colorSign: "#5c3e30",
+            color: "#5c3e30",
+            bgColor: "#DDBEA9",
+            borderColor: "#5c3e30"
         }
     },
     form: {

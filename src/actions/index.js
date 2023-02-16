@@ -32,3 +32,6 @@ export const onSetTrainingPlace = function(trainingPlace) {
 export const onLoadSettings = function(settings) {
     return {type: 'LOAD_SETTINGS', payload: {settings}}
 }
+export const onSetSortValue = function(sortValue) {
+    return {type: 'SET_SORT_VALUE', payload: {sortValue}}
+}

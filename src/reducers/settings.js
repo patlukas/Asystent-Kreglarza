@@ -2,7 +2,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const initialState = {
     homePlace: [],
-    trainingPlace: []
+    trainingPlace: [],
+    sortValue: 'date_gain'
 }
 
 const save = async (value) => {
@@ -21,6 +22,10 @@ const settings = function (state = initialState, action) {
             return newState
         case "SET_HOME_PLACE":
             newState.homePlace = action.payload.homePlace
+            save(newState)
+            return newState
+        case "SET_SORT_VALUE":
+            newState.sortValue = action.payload.sortValue
             save(newState)
             return newState
         default:
