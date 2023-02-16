@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {FlatList, View, Text, StyleSheet, Animated} from 'react-native';
-import { connect } from "react-redux";
-import { onDeleteResult, onSetSortValue } from '../../../actions';
+import {connect} from "react-redux";
+import {onDeleteResult, onSetSortValue} from '../../../actions';
 import AlertTwoOption from '../../Alerty/AlertTwoOption';
 import BarTopTwoBtn from '../../BarTopTwoBtn';
 import Edit_Window from '../../Edit_Window';
@@ -9,7 +9,7 @@ import MenuBar from '../../MenuBar';
 import ResultItem from '../ResultItem/ResultItem';
 import Results_ButtonAddNewResult from '../Results_ButtonAddNewResult';
 import Sort from '../Sort';
-import { sortListOfResults } from './scriptSort';
+import {sortListOfResults} from './scriptSort';
 
 
 class Results_Window extends Component {
@@ -19,7 +19,8 @@ class Results_Window extends Component {
             editedResult: null,
             idDeleteResult: null,
             heightSort: new Animated.Value(0),
-            sortVisible: false
+            sortVisible: false,
+            idResultWithAdditionalOptions: null
         }
         this.beforeOnDeleteResult = this.beforeOnDeleteResult.bind(this)
     }
@@ -49,6 +50,8 @@ class Results_Window extends Component {
                         item={item} 
                         onDeleteResult={() => this.setState({idDeleteResult: item.id})} 
                         onEditResult={() => this.setState({editedResult: item})}
+                        showAdditionalOptions={this.state.idResultWithAdditionalOptions == item.id}
+                        onShowAdditionalOptions={() => this.setState({idResultWithAdditionalOptions: item.id})}
                     />
                 }
                 contentContainerStyle={{ paddingBottom: 87 }}

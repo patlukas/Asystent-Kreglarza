@@ -174,6 +174,11 @@ const resultsList = function (state = initialState, action) {
     switch (action.type) {
         case "SET_LIST_RESULTS":
             var newState = [...action.payload.listOfResults]
+            // for(let i=0; i<2000; i++) {
+            //     let el = JSON.parse(JSON.stringify(newState[0]))
+            //     el.id = 1000 + i
+            //     newState.push(el)
+            // }
             return newState
         case "DELETE_RESULT":
             const {idDeleteResult} = action.payload
