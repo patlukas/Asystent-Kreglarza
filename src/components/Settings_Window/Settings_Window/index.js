@@ -3,6 +3,7 @@ import {View, Text, StyleSheet, ScrollView, BackHandler} from 'react-native';
 import { connect } from "react-redux";
 import {onSelectWindow} from '../../../actions';
 import MenuBar from '../../MenuBar';
+import Backup from '../Backup';
 import HomePlaceDropdown from '../HomePlaceDropdown';
 import ThemeDropdown from '../ThemeDropdown';
 import TrainingPlaceDropdown from '../TrainingPlaceDropdown';
@@ -32,6 +33,8 @@ class Settings_Window extends Component {
                 <Text style={styles.topBar(backgroundColor, color)}>Ustawienia</Text>
                 <ScrollView style={{backgroundColor: colors.backgroundColor, width: "100%"}}>
                     <View style={{height: 20}} />
+                    <Backup />
+                    <View style={styles.separator(colors.form.main)} />
                     <ThemeDropdown />
                     <View style={styles.separator(colors.form.main)} />
                     <HomePlaceDropdown />
@@ -68,7 +71,7 @@ const styles = StyleSheet.create({
         borderColor, 
         borderTopWidth: 3, 
         marginTop: 15, 
-        marginBottom: 15, 
+        marginBottom: 8, 
         width: "100%"
     })
 })
