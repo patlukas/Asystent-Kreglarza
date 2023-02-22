@@ -3,7 +3,15 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const initialState = {
     homePlace: [],
     trainingPlace: [],
-    sortValue: 'date_gain'
+    sortValue: 'date_gain',
+    filter: {
+        gameTypes: [
+            {value: true, listId: [1, 2], name: "Superliga"},
+            {value: true, listId: [3], name: "CLJ"},
+            {value: true, listId: [4], name: "Zawody"},
+            {value: true, listId: [5], name: "Trening"},
+        ],
+    }
 }
 
 const save = async (value) => {
@@ -15,7 +23,9 @@ const settings = function (state = initialState, action) {
     let newState = {...state}
     switch (action.type) {
         case "LOAD_SETTINGS":
-            return action.payload.settings
+            var load = action.payload.settings
+            // load.filter = initialState.filter
+            return load //TODO
         case "SET_TRAINING_PLACE":
             newState.trainingPlace = action.payload.trainingPlace
             save(newState)
@@ -26,6 +36,10 @@ const settings = function (state = initialState, action) {
             return newState
         case "SET_SORT_VALUE":
             newState.sortValue = action.payload.sortValue
+            save(newState)
+            return newState
+        case "SET_FILTER":
+            newState.filter = action.payload.filter
             save(newState)
             return newState
         default:

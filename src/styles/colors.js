@@ -32,6 +32,14 @@ const common = {
             color: "#fff",
             bgColor: "#0f0",
             borderColor: "#00f"
+        },
+        filter: {
+            main: "#757457",
+            second: "#7E5541",
+            bgColor: "#583b2d", 
+            borderColor: "#121212",
+            btnBgColor: "#6d4a38",
+            btnColor: "#232323"
         }
     },
     form: {
@@ -103,6 +111,14 @@ const Ciemny = {
             color: "#977666",
             bgColor: "#121212",
             borderColor: "#121212"
+        },
+        filter: {
+            main: "#757457",
+            second: "#7E5541",
+            bgColor: "#583b2d", 
+            borderColor: "#121212",
+            btnBgColor: "#6d4a38",
+            btnColor: "#232323"
         }
     },
     form: {
@@ -175,6 +191,14 @@ const Jasny = {
             color: "#5c3e30",
             bgColor: "#DDBEA9",
             borderColor: "#5c3e30"
+        },
+        filter: {
+            main: "#757457",
+            second: "#7E5541",
+            bgColor: "#583b2d", 
+            borderColor: "#121212",
+            btnBgColor: "#6d4a38",
+            btnColor: "#232323"
         }
     },
     form: {

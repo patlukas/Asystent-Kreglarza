@@ -17,9 +17,13 @@ const Sort = ({colors, selected, onClose, onSelect, height, visible}) => {
         {label: 'Kolejność dodania: od najnowszego', value: 'id_gain'},
         {label: 'Kolejność dodania: od najstarszego', value: 'id_cost'}
     ]
-    if(!visible) return null
+    let code = []
+    if(visible) code.push(
+        <TouchableOpacity key={1} style={styles.screenContainer} activeOpacity={1} onPress={onClose}/>
+    )
     return (
-        <TouchableOpacity style={styles.screenContainer} activeOpacity={1} onPress={onClose}>
+        <>
+            {code}
             <Animated.View style={styles.mainContainer(height)}>
                 <ScrollView>
                     <View style={styles.optionsContainer(bgColor, borderColor)}>
@@ -27,7 +31,7 @@ const Sort = ({colors, selected, onClose, onSelect, height, visible}) => {
                     </View>
                 </ScrollView>
             </Animated.View>
-        </TouchableOpacity>
+        </>
     );
 }
 
