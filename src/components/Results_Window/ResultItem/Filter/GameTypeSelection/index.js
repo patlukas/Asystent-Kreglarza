@@ -1,29 +1,33 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import {connect} from "react-redux";
-import Checkbox from 'expo-checkbox';
+import BouncyCheckbox from "react-native-bouncy-checkbox";
 
 
 const GameTypeSelection = ({colors, listOptions, onChange}) => {
-    const {main, second} = colors.result.filter
+    const {main, second, checkboxColor, checkboxIconColor} = colors.result.filter
     return (
         <View>
             <Text style={styles.mainText(main)}>Rodzaj gry</Text>
-            {getListOptions(listOptions, onChange, second)}
+            {getListOptions(listOptions, onChange, second, checkboxColor, checkboxIconColor)}
         </View>
     )
 }
 
-const getListOptions = (listOptions, onChange, color) => {
+const getListOptions = (listOptions, onChange, color, checkboxColor, checkboxIconColor) => {
     let listComponents = []
     listOptions.forEach((el, index) => {
         listComponents.push(
-            <GameTypeCheckbox 
+            <BouncyCheckbox 
                 key={index}
-                selected={el.value}
-                name={el.name}
-                onClick={() => onClickGameType(listOptions, index, onChange)}
-                color={color}
+                isChecked={el.value}
+                onPress={() => onClickGameType(listOptions, index, onChange)} 
+                disableBuiltInState={true} 
+                size={20} 
+                textComponent={<Text style={styles.optionText(color)}>{el.name}</Text>}
+                iconImageStyle ={{tintColor: checkboxIconColor}}
+                fillColor={checkboxColor}
+                style={styles.checkbox}
             />
         )
     })
@@ -35,24 +39,7 @@ const onClickGameType = (listOptions, index, onChange) => {
     onChange(listOptions)
 }
 
-const GameTypeCheckbox = ({selected, name, onClick, color}) => {
-    return (
-        <TouchableOpacity onPress={onClick} style={styles.optionContainer}>
-            <Checkbox value={selected} onValueChange={onClick} color={color}/>
-            <Text style={styles.optionText(color)}>{name}</Text>
-        </TouchableOpacity>
-    )
-}
-
 const styles = StyleSheet.create({
-    optionContainer: {
-        flexWrap: 'wrap', 
-        flexDirection: 'row',
-        paddingTop: 5,
-        paddingBottom: 5,
-        width: "100%",
-        paddingLeft: 7
-    },
     optionText: (color) => ({
         color,
         paddingLeft: 5,
@@ -62,7 +49,11 @@ const styles = StyleSheet.create({
         textAlign: "center",
         fontWeight: "bold",
         fontSize: 15
-    })
+    }),
+    checkbox: {
+        paddingVertical: 4, 
+        paddingLeft: 6
+    }
 })
 
 const mapStateToProps = state => ({

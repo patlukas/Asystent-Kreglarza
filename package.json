@@ -21,12 +21,12 @@
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "react-native": "0.70.5",
+    "react-native-bouncy-checkbox": "^3.0.7",
     "react-native-material-dropdown": "github:patlukas/react-native-material-dropdown",
     "react-native-material-textfield": "github:patlukas/react-native-material-textfield",
     "react-native-web": "~0.18.7",
     "react-redux": "^8.0.4",
-    "redux": "^4.2.0",
-    "expo-checkbox": "~2.2.2"
+    "redux": "^4.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
         textAlign: "center",
         fontWeight: "bold",
         fontSize: 15,
-        marginTop: 15
+        marginTop: 20
     })
 })
 

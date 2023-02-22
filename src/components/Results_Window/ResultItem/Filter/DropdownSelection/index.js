@@ -27,6 +27,7 @@ const DropdownSelection = ({title, colors, selectedIndex, listOptions, onChange}
 
 const styles = StyleSheet.create({
     constainer: {
+        marginTop: 6,
         marginHorizontal: 5,
         marginBottom: 5
     },
@@ -36,7 +37,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         fontSize: 15,
         position: "absolute",
-        top: 14,
+        top: 15,
         width: "100%"
     })
 })

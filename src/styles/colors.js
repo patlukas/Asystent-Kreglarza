@@ -39,7 +39,12 @@ const common = {
             bgColor: "#583b2d", 
             borderColor: "#121212",
             btnBgColor: "#6d4a38",
-            btnColor: "#232323"
+            btnColor: "#232323",
+            dropdownNoSelected: "#393939", 
+            dropdownSelected: "#757457", 
+            dropdownPickerBg:"#121212",
+            checkboxIconColor: "#583b2d",
+            checkboxColor: "#7E5541"
         }
     },
     form: {
@@ -121,7 +126,9 @@ const Ciemny = {
             btnColor: "#232323",
             dropdownNoSelected: "#393939", 
             dropdownSelected: "#757457", 
-            dropdownPickerBg:"#121212"
+            dropdownPickerBg:"#121212",
+            checkboxIconColor: "#583b2d",
+            checkboxColor: "#7E5541"
         }
     },
     form: {
@@ -196,15 +203,17 @@ const Jasny = {
             borderColor: "#5c3e30"
         },
         filter: {
-            main: "#757457",
-            second: "#7E5541",
+            main: "#5c3e30",
+            second: "#8f604a",
             bgColor: "#acac96", 
             borderColor: "#121212",
-            btnBgColor: "#6d4a38",
+            btnBgColor: "#8f604a",
             btnColor: "#232323",
             dropdownNoSelected: "#e7c8a0", 
             dropdownSelected: "#5c3e30", 
-            dropdownPickerBg:"#d4a373"
+            dropdownPickerBg:"#d4a373",
+            checkboxIconColor: "#acac96",
+            checkboxColor: "#5c3e30"
         }
     },
     form: {
