@@ -118,7 +118,10 @@ const Ciemny = {
             bgColor: "#583b2d", 
             borderColor: "#121212",
             btnBgColor: "#6d4a38",
-            btnColor: "#232323"
+            btnColor: "#232323",
+            dropdownNoSelected: "#393939", 
+            dropdownSelected: "#757457", 
+            dropdownPickerBg:"#121212"
         }
     },
     form: {
@@ -195,10 +198,13 @@ const Jasny = {
         filter: {
             main: "#757457",
             second: "#7E5541",
-            bgColor: "#583b2d", 
+            bgColor: "#acac96", 
             borderColor: "#121212",
             btnBgColor: "#6d4a38",
-            btnColor: "#232323"
+            btnColor: "#232323",
+            dropdownNoSelected: "#e7c8a0", 
+            dropdownSelected: "#5c3e30", 
+            dropdownPickerBg:"#d4a373"
         }
     },
     form: {

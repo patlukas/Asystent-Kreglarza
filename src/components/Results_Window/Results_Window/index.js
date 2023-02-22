@@ -41,7 +41,7 @@ class Results_Window extends Component {
         })
         const leftFilter = this.state.leftFilter.interpolate({
             inputRange: [0, 1],
-            outputRange: [-206, 0]
+            outputRange: [-236, 0]
         })
         let {listOfResults, sortValue, colors} = this.props;
         const numberOfResults = listOfResults.length

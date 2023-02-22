@@ -3,9 +3,10 @@ import {TouchableOpacity, View, StyleSheet, Animated, ScrollView} from 'react-na
 import {connect} from "react-redux";
 import GameTypeSelection from '../GameTypeSelection';
 import ClearFilterButton from '../ClearFilterButton';
+import DropdownSelection from '../DropdownSelection';
 
 
-const Filter = ({colors, onClose, filter, visible, onChange, left}) => {
+const Filter = ({colors, onClose, filter, visible, onChange, left, listWhere, listEnemy}) => {
     const {bgColor, borderColor} = colors.result.filter
     let code = []
     if(visible) code.push(
@@ -22,6 +23,18 @@ const Filter = ({colors, onClose, filter, visible, onChange, left}) => {
                             listOptions={filter.gameTypes}
                             onChange={(newGameTypes) => prepareFilterToSave(filter, onChange, "gameTypes", newGameTypes)}
                         />
+                        <DropdownSelection
+                            title="Miejsce gry"
+                            selectedIndex={filter.whereIndex}
+                            listOptions={getListToDropdown(listWhere, "Wszędzie", "Inne miejsce")}
+                            onChange={(newIndex) => prepareFilterToSave(filter, onChange, "where", newIndex)}
+                        />
+                        <DropdownSelection
+                            title="Rywal"
+                            selectedIndex={filter.enemyIndex}
+                            listOptions={getListToDropdown(listEnemy, "Z kimkolwiek", "Inny rywal")}
+                            onChange={(newIndex) => prepareFilterToSave(filter, onChange, "enemy", newIndex)}
+                        />
                     </View>
                 </ScrollView>
             </Animated.View>
@@ -31,6 +44,8 @@ const Filter = ({colors, onClose, filter, visible, onChange, left}) => {
 
 const prepareFilterToSave = (filter, onChange, kind, value) => {
     if(kind == "gameTypes") filter.gameTypes = value
+    else if(kind == "where") filter.whereIndex = value
+    else if(kind == "enemy") filter.enemyIndex = value
     onChange(filter)
 }
 
@@ -41,9 +56,20 @@ const onClearFilter = (onChange) => {
             {value: true, listId: [3], name: "CLJ"},
             {value: true, listId: [4], name: "Zawody"},
             {value: true, listId: [5], name: "Trening"}
-        ]
+        ],
+        whereIndex: 0,
+        enemyIndex: 0,
     }
     onChange(filter)
+}
+
+const getListToDropdown = (list, labelNoMatter, labelOther) => {
+    let data = [{value: 0, label: labelNoMatter}]
+    list.forEach(el => {
+        let label = (el[0] != -1) ? el[1] : labelOther 
+        data.push({value: el[0], label})
+    })
+    return data
 }
 
 const styles = StyleSheet.create({
@@ -54,7 +80,7 @@ const styles = StyleSheet.create({
     },
     mainContainer: (backgroundColor, borderColor, left) => ({
         backgroundColor, borderColor, left,
-        width: 200,
+        width: 230,
         height: "100%", 
         position: "absolute", 
         borderRightWidth: 6
@@ -62,7 +88,9 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = state => ({
-    colors: state.theme.colors
+    colors: state.theme.colors,
+    listWhere: state.whereAndEnemy.listWhere,
+    listEnemy: state.whereAndEnemy.listEnemy
 })
 
 export default connect(mapStateToProps, undefined)(Filter);

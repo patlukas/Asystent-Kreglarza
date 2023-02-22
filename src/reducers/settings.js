@@ -11,6 +11,8 @@ const initialState = {
             {value: true, listId: [4], name: "Zawody"},
             {value: true, listId: [5], name: "Trening"},
         ],
+        whereIndex: 0,
+        enemyIndex: 0,
     }
 }
 
