@@ -1,13 +1,14 @@
 import React from 'react';
-import {TouchableOpacity, View, StyleSheet, Animated, ScrollView} from 'react-native';
+import {TouchableOpacity, View, StyleSheet, Animated, ScrollView, Text} from 'react-native';
 import {connect} from "react-redux";
 import GameTypeSelection from '../GameTypeSelection';
 import ClearFilterButton from '../ClearFilterButton';
 import DropdownSelection from '../DropdownSelection';
+import CheckboxSelection from '../CheckboxSelection';
 
 
 const Filter = ({colors, onClose, filter, visible, onChange, left, listWhere, listEnemy}) => {
-    const {bgColor, borderColor} = colors.result.filter
+    const {main, bgColor, borderColor} = colors.result.filter
     let code = []
     if(visible) code.push(
         <TouchableOpacity key={1} style={styles.screenContainer} activeOpacity={1} onPress={onClose}/>
@@ -35,6 +36,12 @@ const Filter = ({colors, onClose, filter, visible, onChange, left, listWhere, li
                             listOptions={getListToDropdown(listEnemy, "Z kimkolwiek", "Inny rywal")}
                             onChange={(newIndex) => prepareFilterToSave(filter, onChange, "enemy", newIndex)}
                         />
+                        <Text style={styles.textOtherFilter(main)}>Inne filtry</Text>
+                        <CheckboxSelection
+                            title="Tylko wyniki pełnej meczówki"
+                            value={filter.fullGame}
+                            onChange={() => prepareFilterToSave(filter, onChange, "fullGame", !filter.fullGame)}
+                        />
                     </View>
                 </ScrollView>
             </Animated.View>
@@ -46,6 +53,7 @@ const prepareFilterToSave = (filter, onChange, kind, value) => {
     if(kind == "gameTypes") filter.gameTypes = value
     else if(kind == "where") filter.whereIndex = value
     else if(kind == "enemy") filter.enemyIndex = value
+    else if(kind == "fullGame") filter.fullGame = value
     onChange(filter)
 }
 
@@ -59,6 +67,7 @@ const onClearFilter = (onChange) => {
         ],
         whereIndex: 0,
         enemyIndex: 0,
+        fullGame: false 
     }
     onChange(filter)
 }
@@ -84,6 +93,13 @@ const styles = StyleSheet.create({
         height: "100%", 
         position: "absolute", 
         borderRightWidth: 6
+    }),
+    textOtherFilter: (color) => ({
+        color,
+        textAlign: "center",
+        fontWeight: "bold",
+        fontSize: 15,
+        marginTop: 15
     })
 })
 

@@ -13,6 +13,7 @@ const initialState = {
         ],
         whereIndex: 0,
         enemyIndex: 0,
+        fullGame: false
     }
 }
 
