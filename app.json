@@ -20,7 +20,7 @@
     "icon": "./src/assets/images/icon.png",
     "android": {
       "package": "com.asystentkreglarza",
-      "versionCode": 9
+      "versionCode": 10
     },
     "androidNavigationBar": {
       "backgroundColor": "#020202"
