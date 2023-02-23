@@ -27,8 +27,8 @@ const settings = function (state = initialState, action) {
     switch (action.type) {
         case "LOAD_SETTINGS":
             var load = action.payload.settings
-            // load.filter = initialState.filter
-            return load //TODO
+            if(load.filter === undefined) load.filter = initialState.filter
+            return load
         case "SET_TRAINING_PLACE":
             newState.trainingPlace = action.payload.trainingPlace
             save(newState)
