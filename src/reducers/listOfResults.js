@@ -165,20 +165,14 @@ const save = async (value) => {
     } catch (e) {console.log(e)}
 }
 
-const sortList = (a, b) => {
-    if(a.date != b.date) return b.date - a.date
-    return b.id-a.id
-}
-
 const resultsList = function (state = initialState, action) {
     switch (action.type) {
         case "SET_LIST_RESULTS":
             var newState = [...action.payload.listOfResults]
-            // for(let i=0; i<2000; i++) {
-            //     let el = JSON.parse(JSON.stringify(newState[0]))
-            //     el.id = 1000 + i
-            //     newState.push(el)
-            // }
+            return newState
+        case "LOAD_RESULTS_FROM_BACKUP":
+            var newState = [...action.payload.listOfResults]
+            save(newState)
             return newState
         case "DELETE_RESULT":
             const {idDeleteResult} = action.payload
@@ -201,7 +195,6 @@ const resultsList = function (state = initialState, action) {
                 }
             }
             save(newState)
-            newState.sort(sortList)
             return newState
         case "CREATE_NEW_RESULT":
             var newState = [...state]
@@ -211,7 +204,6 @@ const resultsList = function (state = initialState, action) {
             newResult.id = newId
             newState.push(newResult)
             save(newState)
-            newState.sort(sortList)
             return newState
         default:
             return state;

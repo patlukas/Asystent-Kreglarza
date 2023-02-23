@@ -43,7 +43,7 @@ class FormForEditResult extends Component {
                         onChange={this.onPrepareResultItemAfterChange}
                         resultItem={editedResult}
                     />
-                    <View style={{height: 80}}/>
+                    <View style={{height: 225}}/>
                 </ScrollView>
                 <AlertTwoOption
                     visible={this.state.showAlertClear}

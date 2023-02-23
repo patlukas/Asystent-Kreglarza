@@ -35,3 +35,9 @@ export const onLoadSettings = function(settings) {
 export const onSetSortValue = function(sortValue) {
     return {type: 'SET_SORT_VALUE', payload: {sortValue}}
 }
+export const onLoadResultsFromBackup = function(listOfResults) {
+    return {type: 'LOAD_RESULTS_FROM_BACKUP', payload: {listOfResults}}
+}
+export const onSetFilter = function(filter) {
+    return {type: 'SET_FILTER', payload: {filter}}
+}

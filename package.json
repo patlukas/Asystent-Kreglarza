@@ -1,6 +1,6 @@
 {
   "name": "asystentkreglarza",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "main": "index.js",
   "scripts": {
     "start": "expo start --dev-client",
@@ -9,15 +9,19 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "@react-native-async-storage/async-storage": "^1.17.11",
-    "@react-native-community/datetimepicker": "^6.6.0",
+    "@react-native-async-storage/async-storage": "~1.17.3",
+    "@react-native-community/datetimepicker": "^6.5.2",
     "expo": "~47.0.12",
+    "expo-document-picker": "~11.0.1",
+    "expo-file-system": "~15.1.1",
+    "expo-sharing": "~11.0.1",
     "expo-splash-screen": "~0.17.5",
     "expo-status-bar": "~1.4.2",
     "prop-types": "^15.8.1",
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "react-native": "0.70.5",
+    "react-native-bouncy-checkbox": "^3.0.7",
     "react-native-material-dropdown": "github:patlukas/react-native-material-dropdown",
     "react-native-material-textfield": "github:patlukas/react-native-material-textfield",
     "react-native-web": "~0.18.7",
@@ -25,7 +29,7 @@
     "redux": "^4.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.19.3"
   },
   "private": true
 }
