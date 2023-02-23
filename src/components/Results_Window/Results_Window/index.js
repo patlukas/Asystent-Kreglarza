@@ -6,7 +6,7 @@ import AlertTwoOption from '../../Alerty/AlertTwoOption';
 import BarTopTwoBtn from '../../BarTopTwoBtn';
 import Edit_Window from '../../Edit_Window';
 import MenuBar from '../../MenuBar';
-import Filter from '../ResultItem/Filter/Filter';
+import Filter from '../Filter/Filter';
 import ResultItem from '../ResultItem/ResultItem';
 import Results_ButtonAddNewResult from '../Results_ButtonAddNewResult';
 import Sort from '../Sort';
