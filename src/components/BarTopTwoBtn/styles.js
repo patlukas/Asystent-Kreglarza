@@ -5,7 +5,8 @@ export const styles = StyleSheet.create({
         backgroundColor,
         position: 'relative',
         width: '100%',
-        height: 39
+        height: 39,
+        zIndex: 2
     }),
     btnLeft: {
         position: 'absolute',

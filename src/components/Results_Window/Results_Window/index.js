@@ -6,7 +6,7 @@ import AlertTwoOption from '../../Alerty/AlertTwoOption';
 import BarTopTwoBtn from '../../BarTopTwoBtn';
 import Edit_Window from '../../Edit_Window';
 import MenuBar from '../../MenuBar';
-import Filter from '../ResultItem/Filter/Filter';
+import Filter from '../Filter/Filter';
 import ResultItem from '../ResultItem/ResultItem';
 import Results_ButtonAddNewResult from '../Results_ButtonAddNewResult';
 import Sort from '../Sort';
@@ -20,12 +20,10 @@ class Results_Window extends Component {
         this.state = {
             editedResult: null,
             idDeleteResult: null,
-            heightSort: new Animated.Value(0),
-            sortVisible: false,
+            animatedSortValue: new Animated.Value(0),
             idResultWithAdditionalOptions: null,
             filter: this.props.filter,
-            leftFilter: new Animated.Value(0),
-            filterVisible: false,
+            animatedFilterValue: new Animated.Value(0),
         }
         this.beforeOnDeleteResult = this.beforeOnDeleteResult.bind(this)
     }
@@ -35,14 +33,6 @@ class Results_Window extends Component {
         }
     }
     render() {
-        const heightSort = this.state.heightSort.interpolate({
-            inputRange: [0, 1],
-            outputRange: ["0%", "75%"]
-        })
-        const leftFilter = this.state.leftFilter.interpolate({
-            inputRange: [0, 1],
-            outputRange: [-236, 0]
-        })
         let {listOfResults, sortValue, colors} = this.props;
         const numberOfResults = listOfResults.length
         listOfResults = filterListOfResults(listOfResults, this.state.filter)
@@ -85,25 +75,26 @@ class Results_Window extends Component {
                 <BarTopTwoBtn 
                     leftBtnTitle="Filtruj" 
                     leftBtnOnPress={this.animatedFilterLeft}
-                    rightBtnTitle="Sortuj" 
-                    rightBtnOnPress={this.animatedSortHeight}
+                    rightBtnTitle="" 
+                    rightBtnOnPress={() => {}}
                 />
                 <View style={styles.resultsContainer}>
                     {code}
                     <Results_ButtonAddNewResult />
                     <Sort 
-                        visible={this.state.sortVisible}
                         selected={sortValue}
-                        height={heightSort} 
+                        animatedValue={this.state.animatedSortValue}
                         onClose={this.animatedSortHeight}
                         onSelect={this.onSelectSortValue}
+                        onShow={this.animatedSortHeight}
+                        animatedFilterValue={this.state.animatedFilterValue}
                     />
                     <Filter
-                        visible={this.state.filterVisible}
-                        left={leftFilter} 
+                        animatedValue={this.state.animatedFilterValue}
                         onClose={this.animatedFilterLeft}
                         onChange={(filter) => this.onSaveNewFilter(filter)}
                         filter={this.state.filter}
+                        animatedSortValue={this.state.animatedSortValue}
                     />
                 </View>
                 <MenuBar />
@@ -123,14 +114,10 @@ class Results_Window extends Component {
     }
 
     animatedSortHeight = () => {
-        let toValue = (this.state.sortVisible) ? 0 : 1
-        const duration = 750 * Math.abs(toValue - this.state.heightSort._value)
-        if(toValue == 1) this.setState({sortVisible: true, filterVisible: false})
-        else this.setState({sortVisible: false})
-        Animated.parallel([
-            Animated.timing(this.state.heightSort, {toValue, duration, useNativeDriver: false}),
-            Animated.timing(this.state.leftFilter, {toValue: 0, duration, useNativeDriver: false})
-        ]).start() 
+        let toValue = (this.state.animatedSortValue.__getValue() == 1) ? 0 : 1
+        const duration = 700 * Math.abs(toValue - this.state.animatedSortValue._value)
+        Animated.timing(this.state.animatedSortValue, {toValue, duration, useNativeDriver: false}).start()
+        Animated.timing(this.state.animatedFilterValue, {toValue: 0, duration, useNativeDriver: false}).start()
     }
 
     onSelectSortValue = (sortValue) => {
@@ -139,14 +126,10 @@ class Results_Window extends Component {
     }
 
     animatedFilterLeft = () => {
-        let toValue = (this.state.filterVisible) ? 0 : 1
-        const duration = 400 * Math.abs(toValue - this.state.leftFilter._value)
-        if(toValue == 1) this.setState({filterVisible: true, sortVisible: false})
-        else this.setState({filterVisible: false})
-        Animated.parallel([
-            Animated.timing(this.state.leftFilter, {toValue, duration, useNativeDriver: false}),
-            Animated.timing(this.state.heightSort, {toValue: 0, duration, useNativeDriver: false})
-        ]).start()
+        let toValue = (this.state.animatedFilterValue.__getValue() == 1) ? 0 : 1
+        const duration = 700 * Math.abs(toValue - this.state.animatedFilterValue._value)
+        Animated.timing(this.state.animatedFilterValue, {toValue, duration, useNativeDriver: false}).start()
+        Animated.timing(this.state.animatedSortValue, {toValue: 0, duration, useNativeDriver: false}).start()
     }
 
     onSaveNewFilter = (newFilter) => {
