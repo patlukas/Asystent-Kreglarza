@@ -1,5 +1,5 @@
-import React from 'react';
-import {TouchableOpacity, View, StyleSheet, Animated, ScrollView, Text} from 'react-native';
+import React, {useState} from 'react';
+import {TouchableOpacity, View, StyleSheet, Animated, ScrollView, Text, PanResponder} from 'react-native';
 import {connect} from "react-redux";
 import GameTypeSelection from '../GameTypeSelection';
 import ClearFilterButton from '../ClearFilterButton';
@@ -7,8 +7,35 @@ import DropdownSelection from '../DropdownSelection';
 import CheckboxSelection from '../CheckboxSelection';
 
 
-const Filter = ({colors, onClose, filter, visible, onChange, left, listWhere, listEnemy}) => {
+const Filter = ({colors, onClose, filter, onChange, listWhere, listEnemy, animatedValue}) => {
+    const [visible, setVisible] = useState(false)
     const {main, bgColor, borderColor} = colors.result.filter
+    animatedValue.addListener(({value}) => {
+        if(visible != (value != 0)) {
+            setVisible((value != 0))
+        }
+    })
+
+    const left = animatedValue.interpolate({inputRange: [0, 1], outputRange: [-230, 0]})
+    let oldDx = 0
+    const panResponder = React.useRef(
+        PanResponder.create({
+            onStartShouldSetPanResponder: () => {
+                oldDx = 0
+                return true
+            },
+            onMoveShouldSetPanResponder: () => true,
+            onPanResponderMove: (_, gestureState) => {
+                val = animatedValue.__getValue() + ((gestureState.dx - oldDx) / 230)
+                oldDx = gestureState.dx
+                val = (val > 1) ? 1 : ((val < 0) ? 0 : val)
+                animatedValue.setValue(val)
+            },
+            onPanResponderRelease: (_, gestureState) => onEndTouch(animatedValue, gestureState),
+            onPanResponderTerminate: (_, gestureState) => onEndTouch(animatedValue, gestureState),
+        })
+    ).current
+
     let code = []
     if(visible) code.push(
         <TouchableOpacity key={1} style={styles.screenContainer} activeOpacity={1} onPress={onClose}/>
@@ -16,7 +43,8 @@ const Filter = ({colors, onClose, filter, visible, onChange, left, listWhere, li
     return (
         <>
             {code}
-            <Animated.View style={styles.mainContainer(bgColor, borderColor, left)}>
+            <View style={styles.additionalColumn} {...panResponder.panHandlers}/>
+            <Animated.View style={styles.mainContainer(bgColor, borderColor, left)} {...panResponder.panHandlers}>
                 <ScrollView>
                     <View>
                         <ClearFilterButton onPress={() => onClearFilter(onChange)}/>
@@ -81,18 +109,31 @@ const getListToDropdown = (list, labelNoMatter, labelOther) => {
     return data
 }
 
+const onEndTouch = (animatedValue, gestureState) => {
+    const val = animatedValue.__getValue()
+    if(val == 0 || val == 1) return
+    toValue = 1
+    if(gestureState.vx < -0.5) toValue = 0
+    else if(gestureState.vx > 0.5) toValue = 1
+    else if(val < 0.35 ) toValue = 0
+    const duration = 400 * Math.abs(toValue - val)
+    Animated.timing(animatedValue, {toValue, duration, useNativeDriver: false}).start()
+}
+
 const styles = StyleSheet.create({
     screenContainer: {
         position: "absolute",
         height: "100%",
-        width: "100%"
+        width: "100%",
+        zIndex: 2
     },
     mainContainer: (backgroundColor, borderColor, left) => ({
         backgroundColor, borderColor, left,
-        width: 230,
         height: "100%", 
-        position: "absolute", 
-        borderRightWidth: 6
+        position: "absolute",
+        borderRightWidth: 6, 
+        width: 230,
+        zIndex: 3
     }),
     textOtherFilter: (color) => ({
         color,
@@ -100,7 +141,13 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         fontSize: 15,
         marginTop: 20
-    })
+    }),
+    additionalColumn: {
+        height: "100%", 
+        width: 40, 
+        position: "absolute", 
+        left: 0
+    }
 })
 
 const mapStateToProps = state => ({

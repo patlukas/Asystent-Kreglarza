@@ -67,22 +67,24 @@ const styles = StyleSheet.create({
         position: "absolute",
         height: "100%",
         width: "100%",
+        zIndex: 2
     },
     mainContainer: (height) => ({
         height, 
         position: "absolute", 
-        right: 4
+        right: 4,
+        zIndex: 3
     }),
     optionsContainer: (backgroundColor, borderColor) => ({
         borderColor, backgroundColor,
         borderWidth: 6,
-        borderTopWidth: 0,
+        borderTopWidth: 0
     }),
     optionContainer: (backgroundColor) => ({
         backgroundColor,
         flexDirection: 'row',
         paddingLeft: 10,
-        paddingRight: 30,
+        paddingRight: 30
     }),
     optionText: (color) => ({
         color,
