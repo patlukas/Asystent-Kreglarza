@@ -7,29 +7,29 @@ import DropdownSelection from '../DropdownSelection';
 import CheckboxSelection from '../CheckboxSelection';
 
 
-const Filter = ({colors, onClose, filter, onChange, listWhere, listEnemy, animatedValue}) => {
+const Filter = ({colors, onClose, filter, onChange, listWhere, listEnemy, animatedValue, animatedSortValue}) => {
     const [visible, setVisible] = useState(false)
     const {main, bgColor, borderColor} = colors.result.filter
-    animatedValue.addListener(({value}) => {
-        if(visible != (value != 0)) {
-            setVisible((value != 0))
-        }
-    })
+    animatedValue.addListener(({value}) => {if(visible != (value != 0)) setVisible((value != 0))})
 
     const left = animatedValue.interpolate({inputRange: [0, 1], outputRange: [-230, 0]})
     let oldDx = 0
     const panResponder = React.useRef(
         PanResponder.create({
-            onStartShouldSetPanResponder: () => {
+            onMoveShouldSetPanResponder: () => {
                 oldDx = 0
                 return true
             },
-            onMoveShouldSetPanResponder: () => true,
             onPanResponderMove: (_, gestureState) => {
-                val = animatedValue.__getValue() + ((gestureState.dx - oldDx) / 230)
+                if(animatedValue.__getValue() == 0 && gestureState.vx > 0) val = (gestureState.moveX + 6) / 230 
+                else val = animatedValue.__getValue() + ((gestureState.dx - oldDx) / 230)
                 oldDx = gestureState.dx
                 val = (val > 1) ? 1 : ((val < 0) ? 0 : val)
                 animatedValue.setValue(val)
+                if(animatedSortValue.__getValue() == 1) {
+                    const duration = 700 * animatedSortValue._value
+                    Animated.timing(animatedSortValue, {toValue: 0, duration, useNativeDriver: false}).start()
+                }
             },
             onPanResponderRelease: (_, gestureState) => onEndTouch(animatedValue, gestureState),
             onPanResponderTerminate: (_, gestureState) => onEndTouch(animatedValue, gestureState),
@@ -38,7 +38,9 @@ const Filter = ({colors, onClose, filter, onChange, listWhere, listEnemy, animat
 
     let code = []
     if(visible) code.push(
-        <TouchableOpacity key={1} style={styles.screenContainer} activeOpacity={1} onPress={onClose}/>
+        <View key={1} {...panResponder.panHandlers} style={styles.screenContainer}>
+            <TouchableOpacity style={styles.screenContainer} activeOpacity={1} onPress={onClose}/>
+        </View>
     )
     return (
         <>
@@ -116,7 +118,7 @@ const onEndTouch = (animatedValue, gestureState) => {
     if(gestureState.vx < -0.5) toValue = 0
     else if(gestureState.vx > 0.5) toValue = 1
     else if(val < 0.35 ) toValue = 0
-    const duration = 400 * Math.abs(toValue - val)
+    const duration = 700 * Math.abs(toValue - val)
     Animated.timing(animatedValue, {toValue, duration, useNativeDriver: false}).start()
 }
 
@@ -124,16 +126,14 @@ const styles = StyleSheet.create({
     screenContainer: {
         position: "absolute",
         height: "100%",
-        width: "100%",
-        zIndex: 2
+        width: "100%"
     },
     mainContainer: (backgroundColor, borderColor, left) => ({
         backgroundColor, borderColor, left,
         height: "100%", 
         position: "absolute",
         borderRightWidth: 6, 
-        width: 230,
-        zIndex: 3
+        width: 230
     }),
     textOtherFilter: (color) => ({
         color,
