@@ -16,9 +16,9 @@ const Filter = ({colors, onClose, filter, onChange, listWhere, listEnemy, animat
     let oldDx = 0
     const panResponder = React.useRef(
         PanResponder.create({
-            onMoveShouldSetPanResponder: () => {
+            onMoveShouldSetPanResponder: (_, gestureState) => {
                 oldDx = 0
-                return true
+                return (gestureState.dx > 3 || gestureState.dx < -3)
             },
             onPanResponderMove: (_, gestureState) => {
                 if(animatedValue.__getValue() == 0 && gestureState.vx > 0) val = (gestureState.moveX + 6) / 230 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {connect} from "react-redux";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 
@@ -28,6 +28,8 @@ const getListOptions = (listOptions, onChange, color, checkboxColor, checkboxIco
                 iconImageStyle ={{tintColor: checkboxIconColor}}
                 fillColor={checkboxColor}
                 style={styles.checkbox}
+                bounceEffectIn={0.7}
+                TouchableComponent={TouchableOpacity}
             />
         )
     })

@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {connect} from "react-redux";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 
@@ -17,6 +17,8 @@ const CheckboxSelection = ({title, colors, onChange, value}) => {
             style={styles.checkbox}
             iconStyle ={{borderRadius: 0}}
             innerIconStyle ={{borderRadius: 0}}
+            bounceEffectIn={0.7}
+            TouchableComponent={TouchableOpacity}
         />
     )
 }
